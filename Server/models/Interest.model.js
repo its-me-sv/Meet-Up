@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const InterestSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     people: {
         type: Array,

@@ -12,9 +12,11 @@ app.use(express.json());
 
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
+const conversationRoute = require("./routes/conversation.route");
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
+app.use("/conversation", conversationRoute);
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, async () => {
