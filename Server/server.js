@@ -13,10 +13,12 @@ app.use(express.json());
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
 const conversationRoute = require("./routes/conversation.route");
+const messageRoute = require("./routes/message.route");
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/conversation", conversationRoute);
+app.use("/message", messageRoute);
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, async () => {
