@@ -10,6 +10,10 @@ app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 
+const authRoute = require("./routes/auth.route");
+
+app.use("/auth", authRoute);
+
 const PORT = process.env.port || 5000;
 app.listen(PORT, async () => {
     console.clear();
