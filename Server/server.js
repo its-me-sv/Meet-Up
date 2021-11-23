@@ -11,8 +11,10 @@ app.use(morgan("tiny"));
 app.use(express.json());
 
 const authRoute = require("./routes/auth.route");
+const userRoute = require("./routes/user.route");
 
 app.use("/auth", authRoute);
+app.use("/user", userRoute);
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, async () => {
