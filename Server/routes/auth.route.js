@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 
+// Register user
 router.post("/register", async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(+process.env.SALT);
@@ -18,6 +19,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
+// User login
 router.post("/login", async (req, res) => {
     try {
         const { password, ...identifier } = req.body;
