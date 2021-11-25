@@ -1,25 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { View, Text, StyleSheet } from "react-native";
 
 import AccountScreen from "../../features/account/screens/account.screen";
-
-const RegisterScreen = () => {
-    return (
-        <View style={styles.container}>
-            <Text>Register Screen</Text>
-        </View>
-    );
-};
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "tomato"
-    }
-});
+import RegisterScreen from "../../features/account/screens/register.screen";
+import ConditionsScreen from "../../features/account/screens/conditions.screen";
 
 const screenOptions = {
     headerShown: false
@@ -32,6 +16,7 @@ const AccountNavigator = () => {
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name="Login" component={AccountScreen}/>
             <Stack.Screen name="Register" component={RegisterScreen}/>
+            <Stack.Screen name="Conditions" component={ConditionsScreen}/>
         </Stack.Navigator>
     );
 };

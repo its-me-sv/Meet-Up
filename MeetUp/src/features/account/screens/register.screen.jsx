@@ -12,12 +12,14 @@ import {
 import Spacer from "../../../components/spacer/spacer.component";
 import Text from "../../../components/typography/text.component";
 
-const AccountScreen = ({ navigation }) => {
-    const emailUsername = useRef("");
+const RegisterScreen = ({ navigation }) => {
+    const username = useRef("");
+    const email = useRef("");
     const password = useRef("");
     const onLogin = () => {
         console.log({
-            emailUsername: emailUsername.current.state.value,
+            username: username.current.state.value,
+            email: email.current.state.value,
             password: password.current.state.value
         });
     };
@@ -28,12 +30,24 @@ const AccountScreen = ({ navigation }) => {
                 <AccountForm>
                     <AuthInput
                         mode="outlined"
-                        label="Email / Username"
-                        placeholder="Email / username"
+                        label="Username"
+                        placeholder="Username"
+                        autoCapitalize="none"
+                        ref={username}
+                        selectionColor="blue"
+                        outlineColor="grey"
+                        activeOutlineColor="black"
+                        selectionColor="#0095f6"
+                    />
+                    <Spacer size="large" />
+                    <AuthInput
+                        mode="outlined"
+                        label="Email"
+                        placeholder="Email"
                         textContentType="emailAddress"
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        ref={emailUsername}
+                        ref={email}
                         selectionColor="blue"
                         outlineColor="grey"
                         activeOutlineColor="black"
@@ -56,12 +70,12 @@ const AccountScreen = ({ navigation }) => {
                     <AuthButton
                         mode="contained"
                         onPress={onLogin}
-                    >Login</AuthButton>
+                    >Create</AuthButton>
                     <Spacer size="large" />
-                    <Text>Not a member ?</Text>
+                    <Text>Already a member ?</Text>
                     <AuthButton
-                        onPress={() => navigation.navigate("Register")} 
-                    >Create account</AuthButton>
+                        onPress={() => navigation.navigate("Login")} 
+                    >Login to account</AuthButton>
                 </AccountForm>
             </AccountContainer>
             <Pressable onPress={() => navigation.navigate("Conditions")}>
@@ -74,4 +88,4 @@ const AccountScreen = ({ navigation }) => {
     );
 };
 
-export default AccountScreen;
+export default RegisterScreen;

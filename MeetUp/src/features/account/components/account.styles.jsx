@@ -50,3 +50,10 @@ export const ErrorContainer = styled.View`
     align-items: center;
     align-self: center;
 `;
+
+export const FooterContainer = styled.View`
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 14px;
+`;
