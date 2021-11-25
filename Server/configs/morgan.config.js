@@ -1,4 +1,4 @@
-const customMorganOption = (tokens, req, res) => {
+const morganConfig = (tokens, req, res) => {
     return "[SERVER] " + [
         tokens.method(req, res),
         tokens.url(req, res),
@@ -8,4 +8,4 @@ const customMorganOption = (tokens, req, res) => {
     ].join(' ');
 };
 
-module.exports = customMorganOption;
+module.exports = morganConfig;
