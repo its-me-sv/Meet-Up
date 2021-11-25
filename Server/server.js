@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
+const customMorgan = require("./utils/custom-morgan.util");
 require("dotenv").config();
 
 const app = express();
 
 app.use(cors());
-app.use(morgan("tiny"));
+app.use(morgan(customMorgan));
 app.use(express.json());
 
 const authRoute = require("./routes/auth.route");
@@ -23,7 +24,7 @@ app.use("/message", messageRoute);
 app.use("/interest", interestRoute);
 
 app.get("/", (req, res) => {
-    console.log(res.status(200).json("Base route"));
+    return res.status(200).json("Base route");
 });
 
 const PORT = process.env.port || 5000;
