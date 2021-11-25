@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import { Pressable } from "react-native";
+import React, { useRef, useState } from "react";
+import { Pressable, ScrollView } from "react-native";
+import { TextInput } from "react-native-paper";
 
 import {
     AccountContainer,
@@ -16,6 +17,7 @@ const RegisterScreen = ({ navigation }) => {
     const username = useRef("");
     const email = useRef("");
     const password = useRef("");
+    const [visible, setVisible] = useState(false);
     const onLogin = () => {
         console.log({
             username: username.current.state.value,
@@ -60,11 +62,17 @@ const RegisterScreen = ({ navigation }) => {
                         placeholder="Password"
                         textContentType="password"
                         autoCapitalize="none"
-                        secureTextEntry
+                        secureTextEntry={!visible}
                         ref={password}
                         outlineColor="grey"
                         activeOutlineColor="black"
                         selectionColor="#0095f6"
+                        right={
+                            <TextInput.Icon
+                                onPress={() => setVisible(!visible)}
+                                name={!visible ? "eye-off" : "eye"}
+                            />
+                        }
                     />
                     <Spacer size="large" />
                     <AuthButton

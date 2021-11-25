@@ -2,7 +2,6 @@ import styled from "styled-components/native";
 import { Button, TextInput } from "react-native-paper";
 import { Dimensions } from "react-native";
 
-import { colors } from "../../../infrastructure/theme/colors";
 import Text from "../../../components/typography/text.component";
 
 const windowWidth = Dimensions.get("window").width;
@@ -55,5 +54,5 @@ export const FooterContainer = styled.View`
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: ${props => props.theme.space[4]};
 `;
