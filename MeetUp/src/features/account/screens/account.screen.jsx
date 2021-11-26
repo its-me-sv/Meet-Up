@@ -1,14 +1,15 @@
 import React, { useRef, useState } from "react";
-import { Pressable } from "react-native";
 import { TextInput } from "react-native-paper";
+import { ScrollView } from "react-native";
 
 import {
+    Scroller,
     AccountContainer,
     AccountForm,
     AuthButton,
     Title,
     AuthInput,
-    FooterContainer
+    PressableFooter
 } from "../components/account.styles";
 import Spacer from "../../../components/spacer/spacer.component";
 import Text from "../../../components/typography/text.component";
@@ -24,7 +25,7 @@ const AccountScreen = ({ navigation }) => {
         });
     };
     return (
-        <>
+        <Scroller>
             <AccountContainer>
                 <Title>Meet Up</Title>
                 <AccountForm>
@@ -68,17 +69,18 @@ const AccountScreen = ({ navigation }) => {
                     <Spacer size="large" />
                     <Text>Not a member ?</Text>
                     <AuthButton
-                        onPress={() => navigation.navigate("Register")} 
+                        onPress={() => navigation.navigate("Register")}
+                        tiny={true} 
                     >Create account</AuthButton>
                 </AccountForm>
             </AccountContainer>
-            <Pressable onPress={() => navigation.navigate("Conditions")}>
-                <FooterContainer onPress={() => navigation.navigate("Condition")}>
-                    <Text variant="caption">Terms and Conditions</Text>
-                    <Text variant="caption">Privacy and Policy</Text>
-                </FooterContainer>
-            </Pressable>
-        </>
+            <PressableFooter
+                onPress={() => navigation.navigate("Conditions")}
+            >
+                <Text variant="caption">Terms and Conditions</Text>
+                <Text variant="caption">Privacy and Policy</Text>
+            </PressableFooter>
+        </Scroller>
     );
 };
 

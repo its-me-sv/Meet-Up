@@ -1,15 +1,24 @@
 import styled from "styled-components/native";
 import { Button, TextInput } from "react-native-paper";
-import { Dimensions } from "react-native";
+import { Dimensions, Pressable, ScrollView } from "react-native";
 
 import Text from "../../../components/typography/text.component";
 
 const windowWidth = Dimensions.get("window").width;
 
+export const Scroller = styled(ScrollView).attrs({
+    contentContainerStyle: {
+        flexGrow: 1, 
+        justifyContent: 'center' 
+    }
+})`
+`;
+
 export const AccountContainer = styled.View`
-    flex: 1;
+    /* flex: 1;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
 `;
 
 export const AccountCover = styled.View`
@@ -31,6 +40,7 @@ export const AuthButton = styled(Button).attrs({
 })`
     padding: ${props => props.theme.space[1]};
     width: ${windowWidth - 84}px;
+    ${({tiny}) => tiny && `width: auto;`}
 `;
 
 export const AuthInput = styled(TextInput)`
@@ -50,9 +60,9 @@ export const ErrorContainer = styled.View`
     align-self: center;
 `;
 
-export const FooterContainer = styled.View`
-    flex-direction: column;
-    justify-content: flex-end;
+export const PressableFooter = styled(Pressable)`
+    align-self: center;
+    justify-content: center;
     align-items: center;
-    margin-bottom: ${props => props.theme.space[4]};
+    margin-bottom: ${props => props.theme.space[3]};
 `;
