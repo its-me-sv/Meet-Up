@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 
 import SafeArea from "../../../components/utility/safe-area.component";
 import termsAndConditions from "../../../utils/terms-and-conditions";
@@ -11,9 +12,9 @@ import {
     ScrollContainer
 } from "./conditions.styles";
 
-const ConditionsScreen = () => {
+const ConditionsScreen = ({fromSettings=false}) => {
     return (
-        <SafeArea>
+        <SafeArea fromSettings={fromSettings}>
             <ConditionsContainer>
                 <Title>Meet Up</Title>
                 <Text>Terms and Conditions</Text>
@@ -28,6 +29,7 @@ const ConditionsScreen = () => {
                     <Text variant="hint">{privacyPolicy}</Text>
                 </ScrollContainer>
             </ConditionsContainer>
+            {fromSettings === true && <Spacer size="large"/>}
         </SafeArea>
     );
 };

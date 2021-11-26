@@ -1,12 +1,14 @@
 import styled from "styled-components/native";
+import { TouchableOpacity } from "react-native";
 
-export const ItemContainer = styled.View`
+export const ItemContainer = styled(TouchableOpacity)`
     flex-direction: row;
     align-items: center;
-    padding: 14px;
+    padding: 10px;
     padding-top: 0px;
 `;
 
 export const FieldText = styled.Text`
     font-size: 24px;
+    color: #282626;
 `;

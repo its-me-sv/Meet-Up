@@ -7,10 +7,10 @@ import {
     FieldText
 } from "./setting-item.styles";
 
-const SettingItem = ({ brand = "f", icon, field }) => {
+const SettingItem = ({ brand = "f", icon, field, callBack }) => {
     const IconBrand = brand === 'f' ? Feather : MaterialCommunityIcons;
     return (
-        <ItemContainer>
+        <ItemContainer onPress={callBack}>
             <IconBrand size={24} name={icon} />
             <Spacer position="left" size="large" />
             <FieldText>{field}</FieldText>
