@@ -1,7 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from "styled-components/native";
 import { useFonts } from 'expo-font';
+import { Provider } from "react-redux";
 
+import store from "./src/redux/store";
 import theme from "./src/infrastructure/theme/index";
 import Navigation from './src/infrastructure/navigation/navigator.component';
 
@@ -28,7 +30,9 @@ const App = () => {
   
   return (
     <ThemeProvider theme={theme}>
-      <Navigation />
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
     </ThemeProvider>
   );
 };

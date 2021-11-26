@@ -1,14 +1,20 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { connect } from "react-redux"
 
 import AccountNavigator from "./account.navigator";
+import AppNavigator from "./app.navigator";
 
-const Navigation = () => {
+const Navigation = ({ user }) => {
     return (
         <NavigationContainer>
-            <AccountNavigator />
+            { user ? <AppNavigator /> : <AccountNavigator />}
         </NavigationContainer>
     );
 };
 
-export default Navigation;
+const mapStateToProps = state => ({
+    user: state.user.user
+});
+
+export default connect(mapStateToProps)(Navigation);

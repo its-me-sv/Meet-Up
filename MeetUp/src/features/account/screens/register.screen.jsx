@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { TextInput } from "react-native-paper";
-import { ScrollView } from "react-native";
+import axios from "axios";
+import { connect } from "react-redux";
 
 import {
     Scroller,
@@ -13,17 +14,32 @@ import {
 } from "../components/account.styles";
 import Spacer from "../../../components/spacer/spacer.component";
 import Text from "../../../components/typography/text.component";
+import { 
+    fetchUserSuccess,
+    fetchUserFailure,
+    userReset,
+    fetchUserPending
+} from "../../../redux/user/user.actions";
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({ 
+    navigation, setUser, setFailure, error, pending, resetUser, setStart 
+}) => {
     const username = useRef("");
     const email = useRef("");
     const password = useRef("");
     const [visible, setVisible] = useState(false);
-    const onLogin = () => {
-        console.log({
-            username: username.current.state.value,
-            email: email.current.state.value,
-            password: password.current.state.value
+    useEffect(resetUser, []);
+    const onCreate = () => {
+        setStart();
+        let newUsername = username.current.state.value;
+        let newEmail = email.current.state.value;
+        let newPassword = password.current.state.value;
+        axios.post("http://192.168.29.97:5000/auth/register", {
+            username: newUsername,
+            email: newEmail,
+            password: newPassword
+        }).then(({data}) => setUser(data)).catch(() => {
+            setFailure("Username or email already in use");
         });
     };
     return (
@@ -76,9 +92,17 @@ const RegisterScreen = ({ navigation }) => {
                         }
                     />
                     <Spacer size="large" />
+                    {error && (
+                        <>
+                            <Text variant="error">{error}</Text>
+                            <Spacer size="large" />
+                        </>
+                    )}
                     <AuthButton
                         mode="contained"
-                        onPress={onLogin}
+                        onPress={onCreate}
+                        loading={pending}
+                        disabled={pending}
                     >Create</AuthButton>
                     <Spacer size="large" />
                     <Text>Already a member ?</Text>
@@ -98,4 +122,19 @@ const RegisterScreen = ({ navigation }) => {
     );
 };
 
-export default RegisterScreen;
+const mapStateToProps = ({user}) => ({
+    error: user.error,
+    pending: user.isPending
+});
+
+const mapDispatchToProps = dispatch => ({
+    setUser: data => dispatch(fetchUserSuccess(data)),
+    setFailure: err => dispatch(fetchUserFailure(err)),
+    resetUser: () => dispatch(userReset()),
+    setStart: () => dispatch(fetchUserPending())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegisterScreen);

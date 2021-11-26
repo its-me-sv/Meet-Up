@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { TextInput } from "react-native-paper";
-import { ScrollView } from "react-native";
+import { connect } from "react-redux";
 
 import {
     Scroller,
@@ -13,16 +13,27 @@ import {
 } from "../components/account.styles";
 import Spacer from "../../../components/spacer/spacer.component";
 import Text from "../../../components/typography/text.component";
+import {
+    userReset,
+    fetchUserStart
+} from "../../../redux/user/user.actions";
 
-const AccountScreen = ({ navigation }) => {
+const AccountScreen = ({ 
+    navigation, resetUser, loginUser, pending, error
+}) => {
     const emailUsername = useRef("");
     const password = useRef("");
     const [visible, setVisible] = useState(false);
+    useEffect(resetUser, []);
     const onLogin = () => {
-        console.log({
-            emailUsername: emailUsername.current.state.value,
-            password: password.current.state.value
-        });
+        const body = {};
+        body["password"] = password.current.state.value;
+        const credential = emailUsername.current.state.value;
+        if (credential.includes('@'))
+            body["email"] = credential;
+        else
+            body["username"] = credential;
+        loginUser(body);
     };
     return (
         <Scroller>
@@ -62,9 +73,17 @@ const AccountScreen = ({ navigation }) => {
                         }
                     />
                     <Spacer size="large" />
+                    {error && (
+                        <>
+                            <Text variant="error">{error}</Text>
+                            <Spacer size="large" />
+                        </>
+                    )}
                     <AuthButton
                         mode="contained"
                         onPress={onLogin}
+                        loading={pending}
+                        disabled={pending}
                     >Login</AuthButton>
                     <Spacer size="large" />
                     <Text>Not a member ?</Text>
@@ -84,4 +103,19 @@ const AccountScreen = ({ navigation }) => {
     );
 };
 
-export default AccountScreen;
+const mapStateToProps = state => ({
+    user: state.user.user,
+    error: state.user.error,
+    pending: state.user.isPending,
+    error: state.user.error
+});
+
+const mapDispatchToProps = dispatch => ({
+    resetUser: () => dispatch(userReset()),
+    loginUser: data => dispatch(fetchUserStart(data))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AccountScreen);
