@@ -30,12 +30,17 @@ const label = theme => `
     font-weight: ${theme.fontWeights.medium};
 `;
 
+const success = theme => `
+    color: ${theme.colors.text.success};
+`;
+
 const variants = {
     body,
     label,
     caption,
     error,
-    hint
+    hint,
+    success
 };
 
 const Text = styled.Text`

@@ -21,6 +21,7 @@ const CredentialsScreen = ({ user, updateUser, pending, error, setError }) => {
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [disabled, setDisabled] = useState(true);
+    const [success, setSuccess] = useState(false);
     const isDisabled = () => {
         const passwordVaried = password.length > 0;
         const usernameVaried = username !== user.username && username.length > 0;
@@ -34,6 +35,7 @@ const CredentialsScreen = ({ user, updateUser, pending, error, setError }) => {
     }, []);
     useEffect(() => {
         setDisabled(isDisabled());
+        setSuccess(false);
     }, [username, email, password]);
     const onUpdate = async () => {
         const body = {};
@@ -46,6 +48,7 @@ const CredentialsScreen = ({ user, updateUser, pending, error, setError }) => {
             body["password"] = password;
         let result = await updateUser(body);
         setDisabled(result);
+        setSuccess(result);
         setPassword("");
     };
     return (
@@ -104,6 +107,12 @@ const CredentialsScreen = ({ user, updateUser, pending, error, setError }) => {
                 {error && (
                     <>
                         <Text variant="error">{error}</Text>
+                        <Spacer size="large" />
+                    </>
+                )}
+                {success && (
+                    <>
+                        <Text variant="success">Credentials updated</Text>
                         <Spacer size="large" />
                     </>
                 )}
