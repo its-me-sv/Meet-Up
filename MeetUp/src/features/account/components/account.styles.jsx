@@ -35,9 +35,7 @@ export const AccountForm = styled.View`
     align-items: center;
 `;
 
-export const AuthButton = styled(Button).attrs({
-    color: "#453a94"
-})`
+export const AuthButton = styled(Button)`
     padding: ${props => props.theme.space[1]};
     width: ${windowWidth - 84}px;
     ${({tiny}) => tiny && `width: auto;`}

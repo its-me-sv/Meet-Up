@@ -6,6 +6,7 @@ import {
 
 import MenuScreen from "./menu.screen";
 import ConditionsScreen from "../../account/screens/conditions.screen";
+import CredentialsScreen from "./credentials.screen";
 
 const screenOptions = {
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -30,6 +31,10 @@ const SettingsScreen = () => {
             <SettingStack.Screen
                 name="Terms and Policies"
                 component={TermsAndPolicies}
+            />
+            <SettingStack.Screen
+                name="Change credentials"
+                component={CredentialsScreen}
             />
         </SettingStack.Navigator>
     );

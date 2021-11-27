@@ -80,6 +80,7 @@ const AccountScreen = ({
                         </>
                     )}
                     <AuthButton
+                        color="#453a94"
                         mode="contained"
                         onPress={onLogin}
                         loading={pending}
@@ -90,6 +91,7 @@ const AccountScreen = ({
                     <AuthButton
                         onPress={() => navigation.navigate("Register")}
                         tiny={true} 
+                        color="#453a94"
                     >Create account</AuthButton>
                 </AccountForm>
             </AccountContainer>

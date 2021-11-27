@@ -16,6 +16,8 @@ const UserReducer = (state = INITIAL_STATE, action) => {
             return {...state, isPending: false, user: action.payload, error: null };
         case userTypes.USER_RESET:
             return {isPending: false, error: null, user: null};
+        case userTypes.CHANGE_SUCCESS:
+            return {isPending: false, error: null, user: {...state.user, ...action.payload}};
         default:
             return state;
     }
