@@ -12,7 +12,11 @@ const MenuScreen = ({ resetUser, navigation }) => {
         <MenuContainer>
             <SettingItem icon="user" field="View account" />
             <SettingItem icon="edit" field="Edit profile" />
-            <SettingItem icon="list" field="Manage intrests" />
+            <SettingItem 
+                icon="list" 
+                field="Manage intrests" 
+                callBack={() => navigation.navigate("Manage intrests")}
+            />
             <SettingItem 
                 brand="mci" 
                 icon="form-textbox-password" 
