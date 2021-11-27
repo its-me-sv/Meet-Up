@@ -9,10 +9,13 @@ import {
 } from "../../account/components/account.styles";
 import Spacer from "../../../components/spacer/spacer.component";
 import { AccountForm } from "../../account/components/account.styles";
-import { changeCredentials } from "../../../redux/user/user.actions";
+import { 
+    changeCredentials,
+    fetchUserFailure
+} from "../../../redux/user/user.actions";
 import Text from "../../../components/typography/text.component";
 
-const CredentialsScreen = ({ user, updateUser, pending, error }) => {
+const CredentialsScreen = ({ user, updateUser, pending, error, setError }) => {
     const [username, setUsername] = useState(user.username);
     const [email, setEmail] = useState(user.email);
     const [password, setPassword] = useState("");
@@ -26,6 +29,9 @@ const CredentialsScreen = ({ user, updateUser, pending, error }) => {
             return false;
         return true;
     };
+    useEffect(() => {
+        return () => setError();
+    }, []);
     useEffect(() => {
         setDisabled(isDisabled());
     }, [username, email, password]);
@@ -120,7 +126,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateUser: body => dispatch(changeCredentials(body))
+    updateUser: body => dispatch(changeCredentials(body)),
+    setError: () => dispatch(fetchUserFailure(null))
 });
 
 export default connect(
