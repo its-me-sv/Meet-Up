@@ -66,5 +66,5 @@ export const FriendContainer = styled.View`
     margin: 3px;
     border-radius: 18px;
     border-width: 1.2px;
-    border-color: #9898a1;
+    border-color: #b1acac;
 `;
