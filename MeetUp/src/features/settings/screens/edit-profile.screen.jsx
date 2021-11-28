@@ -48,6 +48,8 @@ const EditProfileScreen = ({ profileUrl, navigation, userId, setPP }) => {
                     size={142} 
                     source={{ uri: imageUrl + `?${new Date()}`}}
                 />
+                <Spacer size="large" />
+                <Spacer size="large" />
                 <ImageButton
                     icon="camera"
                     onPress={() => navigation.navigate("Camera", {userId})}

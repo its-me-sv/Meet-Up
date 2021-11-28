@@ -8,7 +8,8 @@ export const EditProfileContainer = styled.View`
 `;
 
 export const ImageButton = styled(Button).attrs({
-    mode: "outlined"
+    mode: "text",
+    color: "black"
 })`
-    margin-top: 14px;
+    margin-top: 0px;
 `;
