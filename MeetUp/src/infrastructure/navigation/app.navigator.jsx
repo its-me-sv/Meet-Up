@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 const TAB_ICON = {
     Chat: "chatbox",
     Explore: "search",
-    Settings: "settings"
+    Setting: "settings"
 };
 
 const ChatScreen = () => {
@@ -35,18 +35,18 @@ const screenOptions = ({ route }) => ({
         !focused && (iconName += "-outline");
         return <Ionicons name={iconName} size={size} color={color} />;
     },
-    tabBarActiveTintColor: 'white',
-    tabBarInactiveTintColor: 'black',
+    tabBarActiveTintColor: 'black',
+    tabBarInactiveTintColor: 'gray',
     tabBarShowLabel: false,
-    tabBarStyle: {
-        backgroundColor: '#453a94'
-    },
-    headerStyle: {
-        backgroundColor: '#453a94',
-    },
-    headerTitleStyle: {
-        color: 'white'
-    }
+    // tabBarStyle: {
+    //     backgroundColor: '#453a94'
+    // },
+    // headerStyle: {
+    //     backgroundColor: '#453a94',
+    // },
+    // headerTitleStyle: {
+    //     color: 'white'
+    // }
 });
 
 const AppNavigator = () => {
@@ -54,7 +54,7 @@ const AppNavigator = () => {
         <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen name="Chat" component={ChatScreen} />
             <Tab.Screen name="Explore" component={SearchScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="Setting" component={SettingsScreen} options={{headerShown: false}}/>
         </Tab.Navigator>
     );
 };

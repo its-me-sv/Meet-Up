@@ -28,8 +28,10 @@ const SettingsScreen = () => {
             screenOptions={screenOptions}
         >
             <SettingStack.Screen 
-                options={{header: () => null}}
-                name="Menu"
+                name="Settings"
+                options={{
+                    headerTitleAlign: "left"
+                }}
                 component={MenuScreen}
             />
             <SettingStack.Screen
