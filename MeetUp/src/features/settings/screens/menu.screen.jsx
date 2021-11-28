@@ -14,8 +14,8 @@ const MenuScreen = ({ resetUser, navigation }) => {
             <SettingItem icon="edit" field="Edit profile" />
             <SettingItem 
                 icon="list" 
-                field="Manage intrests" 
-                callBack={() => navigation.navigate("Manage intrests")}
+                field="Manage interests" 
+                callBack={() => navigation.navigate("Manage interests")}
             />
             <SettingItem 
                 brand="mci" 

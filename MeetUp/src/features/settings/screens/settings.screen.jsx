@@ -38,7 +38,7 @@ const SettingsScreen = () => {
                 component={CredentialsScreen}
             />
             <SettingStack.Screen
-                name="Manage intrests"
+                name="Manage interests"
                 component={ManageInterest}
             />
         </SettingStack.Navigator>
