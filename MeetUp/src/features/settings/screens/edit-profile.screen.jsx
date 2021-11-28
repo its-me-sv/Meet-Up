@@ -44,7 +44,10 @@ const EditProfileScreen = ({ profileUrl, navigation, userId, setPP }) => {
         <ScrollView>
             <EditProfileContainer>
                 <Spacer size="large" />
-                <Avatar.Image size={120} source={{ uri: imageUrl + `?${new Date()}`}} />
+                <Avatar.Image 
+                    size={120} 
+                    source={{ uri: imageUrl + `?${new Date()}`}}
+                />
                 <ImageButton
                     icon="camera"
                     onPress={() => navigation.navigate("Camera", {userId})}
