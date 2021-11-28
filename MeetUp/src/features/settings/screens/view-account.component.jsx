@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View } from "react-native";
 import { connect } from "react-redux";
-import { Avatar, Divider, Chip } from "react-native-paper";
+import { Avatar, Divider } from "react-native-paper";
 import { format } from "timeago.js";
 import axios from "axios";
 
 import Spacer from "../../../components/spacer/spacer.component";
+import {
+    AccountContainer,
+    ProfileTop,
+    ProfileTopRight,
+    TextVariant1,
+    TextVariant2,
+    JoinedContainer,
+    TextVariant3,
+    RightEndText,
+    InteresetWrapper,
+    InterestHolder,
+    FriendContainer
+} from "./view-account.styles";
 
 const defaultUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 const baseUrl = "http://192.168.29.97:5001";
@@ -46,144 +59,70 @@ const ViewAccount = ({ user }) => {
     }, []);
     return (
         <ScrollView>
-            <View style={{
-                flex: 1,
-                flexDirection: "column",
-                margin: 21
-            }}>
-                <View style={{
-                    flexDirection: "row",
-                    marginBottom: 14
-                }}>
+            <AccountContainer>
+                <ProfileTop>
                     <Spacer size="large" />
                     <Spacer size="small" />
                     <Avatar.Image
                         size={120}
                         source={{ uri: imageUrl + `?${new Date()}` }}
                     />
-                    <View style={{
-                        flexDirection: "column",
-                        marginLeft: 14
-                    }}>
-                        <Text
-                            style={{
-                                fontSize: 28,
-                                color: "#343131"
-                            }}
-                        >{user.username}</Text>
-                        <Text
-                            style={{
-                                fontSize: 18,
-                                color: "#343131"
-                            }}
-                        >{user.email}</Text>
-                    </View>
-                </View>
+                    <ProfileTopRight>
+                        <TextVariant1>{user.username}</TextVariant1>
+                        <TextVariant2>{user.email}</TextVariant2>
+                    </ProfileTopRight>
+                </ProfileTop>
                 <Divider />
                 <Spacer size="medium" />
-                <View style={{
-                    flexDirection: "row"
-                }}>
+                <JoinedContainer>
                     <View>
-                        <Text
-                            style={{
-                                fontSize: 18,
-                                color: "#343131"
-                            }}
-                        >Joined</Text>
-                        <Text style={{
-                            color: "black",
-                            fontSize: 16
-                        }}>{formatTime(user.createdAt)}</Text>
+                        <TextVariant2>Joined</TextVariant2>
+                        <TextVariant3>{formatTime(user.createdAt)}</TextVariant3>
                     </View>
-                    <Text
-                        style={{
-                            fontSize: 16,
-                            color: "#343131",
-                            marginTop: "auto",
-                            marginLeft: "auto"
-                        }}
-                    >{format(user.createdAt)}</Text>
-                </View>
+                    <RightEndText>{format(user.createdAt)}</RightEndText>
+                </JoinedContainer>
                 <Spacer size="medium" />
                 <Divider />
                 <Spacer size="medium" />
                 <View>
-                    <Text
-                        style={{
-                            fontSize: 18,
-                            color: "#343131"
-                        }}
-                    >Interests</Text>
+                    <TextVariant2>Interests</TextVariant2>
                     <Spacer />
-                    <View style={{
-                        flexDirection: "row",
-                        flexWrap: "wrap",
-                    }}>
+                    <InteresetWrapper>
                         {[...user.interests].map(({_id, name}, idx) => (
-                            <Chip 
+                            <InterestHolder
                                 key={_id} 
-                                mode="outlined"
-                                style={{
-                                    marginRight: 7,
-                                    marginTop: 4, 
-                                    backgroundColor: colors[idx%colors.length], 
-                                    padding: 2,
-                                    elevation: 4
-                                }}
-                                textStyle={{
-                                    color: "white"
-                                }}
-                            >{name}</Chip>
+                                color={colors[idx%colors.length]}
+                            >{name}</InterestHolder>
                         ))}
-                    </View>
+                    </InteresetWrapper>
                 </View>
                 <Spacer size="medium" />
                 <Divider />
                 <Spacer size="medium" />
                 <View>
-                    <Text
-                        style={{
-                            fontSize: 18,
-                            color: "#343131"
-                        }}
-                    >Friends</Text>
+                    <TextVariant2>Friends</TextVariant2>
                     <Spacer size="medium" />
                     <ScrollView>
                     {
                         [...friends].map(({_id, username, profilePicture: pp}) => {
                             const friendPp = pp.length ? baseUrl + pp : defaultUrl;
                             return (
-                                <View 
-                                    key={_id}
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        padding: 3,
-                                        margin: 3,
-                                        marginBottom: 3,
-                                        borderRadius: 18,
-                                        borderWidth: 1.2,
-                                        borderColor: "#9898a1"
-                                    }}
-                                >
+                                <FriendContainer key={_id}>
                                     <Spacer size="medium" position="left"/>
                                     <Avatar.Image
                                         size={49}
                                         source={{uri: friendPp + `?${new Date()}`}}
                                     />
-                                    <Text style={{
-                                        color: "#343131",
-                                        fontSize: 19,
-                                        marginLeft: 14
-                                    }}>{username}</Text>
-                                </View>
+                                    <Spacer size="small" position="left" />
+                                    <Spacer size="small" position="left" />
+                                    <TextVariant2>{username}</TextVariant2>
+                                </FriendContainer>
                             );
                         })
                     }
                     </ScrollView>
                 </View>
-            </View>
+            </AccountContainer>
         </ScrollView>
     );
 };
