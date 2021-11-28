@@ -45,7 +45,7 @@ const EditProfileScreen = ({ profileUrl, navigation, userId, setPP }) => {
             <EditProfileContainer>
                 <Spacer size="large" />
                 <Avatar.Image 
-                    size={120} 
+                    size={142} 
                     source={{ uri: imageUrl + `?${new Date()}`}}
                 />
                 <ImageButton
