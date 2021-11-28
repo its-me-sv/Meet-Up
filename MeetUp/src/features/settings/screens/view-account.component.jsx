@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { connect } from "react-redux";
 import { Avatar, Divider, Chip } from "react-native-paper";
 import { format } from "timeago.js";
+import axios from "axios";
 
 import Spacer from "../../../components/spacer/spacer.component";
 
@@ -35,14 +36,20 @@ const formatTime = date => {
 };
 
 const ViewAccount = ({ user }) => {
-    const { profilePicture } = user;
+    const { profilePicture, _id } = user;
+    const [friends, setFriends] = useState([]);
     const imageUrl = profilePicture.length ? baseUrl + profilePicture : defaultUrl;
+    useEffect(() => {
+        axios.get(`http://192.168.29.97:5000/user/friends/${_id}`)
+        .then(({data}) => setFriends(data))
+        .catch(console.log);
+    }, []);
     return (
         <ScrollView>
             <View style={{
                 flex: 1,
                 flexDirection: "column",
-                margin: 21,
+                margin: 21
             }}>
                 <View style={{
                     flexDirection: "row",
@@ -134,6 +141,48 @@ const ViewAccount = ({ user }) => {
                 <Spacer size="medium" />
                 <Divider />
                 <Spacer size="medium" />
+                <View>
+                    <Text
+                        style={{
+                            fontSize: 18,
+                            color: "#343131"
+                        }}
+                    >Friends</Text>
+                    <Spacer size="medium" />
+                    <ScrollView>
+                    {
+                        [...friends].map(({_id, username, profilePicture: pp}) => {
+                            const friendPp = pp.length ? baseUrl + pp : defaultUrl;
+                            return (
+                                <View 
+                                    key={_id}
+                                    style={{
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        padding: 3,
+                                        margin: 3,
+                                        marginBottom: 3,
+                                        borderRadius: 18,
+                                        borderWidth: 1.2,
+                                        borderColor: "#9898a1"
+                                    }}
+                                >
+                                    <Spacer size="medium" position="left"/>
+                                    <Avatar.Image
+                                        size={49}
+                                        source={{uri: friendPp + `?${new Date()}`}}
+                                    />
+                                    <Text style={{
+                                        color: "#343131",
+                                        fontSize: 19,
+                                        marginLeft: 14
+                                    }}>{username}</Text>
+                                </View>
+                            );
+                        })
+                    }
+                    </ScrollView>
+                </View>
             </View>
         </ScrollView>
     );
