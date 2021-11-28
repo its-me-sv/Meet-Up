@@ -10,7 +10,11 @@ import {
 const MenuScreen = ({ resetUser, navigation }) => {
     return (
         <MenuContainer>
-            <SettingItem icon="user" field="View account" />
+            <SettingItem 
+                icon="user" 
+                field="View account" 
+                callBack={() => navigation.navigate("Account")}
+            />
             <SettingItem 
                 icon="edit" 
                 field="Edit profile" 

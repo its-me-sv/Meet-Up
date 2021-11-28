@@ -10,6 +10,7 @@ import CredentialsScreen from "./credentials.screen";
 import ManageInterest from "./manage-interest.screen";
 import EditProfileScreen from "./edit-profile.screen";
 import CameraScreen from "./camera.screen";
+import ViewAccount from "./view-account.component";
 
 const screenOptions = {
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -50,6 +51,10 @@ const SettingsScreen = () => {
             <SettingStack.Screen
                 name="Camera"
                 component={CameraScreen}
+            />
+            <SettingStack.Screen
+                name="Account"
+                component={ViewAccount}
             />
         </SettingStack.Navigator>
     );
