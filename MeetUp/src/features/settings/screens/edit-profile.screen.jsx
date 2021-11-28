@@ -1,11 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Avatar, Button } from "react-native-paper";
+import { ScrollView } from "react-native";
+import { Avatar } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 
 import Spacer from "../../../components/spacer/spacer.component";
 import { setProfilePicture } from "../../../redux/user/user.actions";
+import { 
+    EditProfileContainer,
+    ImageButton
+} from "./edit-profile.styles";
 
 const defaultUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 const baseUrl = "http://192.168.29.97:5001";
@@ -36,20 +41,20 @@ const EditProfileScreen = ({ profileUrl, navigation, userId, setPP }) => {
             uploadPhoto(pickerResult.uri);
     };
     return (
-        <>
-            <Spacer size="large" />
-            <Avatar.Image size={120} source={{ uri: imageUrl + `?${new Date()}`}} />
-            <Button
-                icon="camera"
-                mode="contained"
-                onPress={() => navigation.navigate("Camera", {userId})}
-            >Take photo</Button>
-            <Button
-                icon="image"
-                mode="contained"
-                onPress={openImagePickerAsync}
-            >Choose Photo</Button>
-        </>
+        <ScrollView>
+            <EditProfileContainer>
+                <Spacer size="large" />
+                <Avatar.Image size={120} source={{ uri: imageUrl + `?${new Date()}`}} />
+                <ImageButton
+                    icon="camera"
+                    onPress={() => navigation.navigate("Camera", {userId})}
+                >Take photo</ImageButton>
+                <ImageButton
+                    icon="image"
+                    onPress={openImagePickerAsync}
+                >Choose Photo</ImageButton>
+            </EditProfileContainer>
+        </ScrollView>
     );
 };
 
