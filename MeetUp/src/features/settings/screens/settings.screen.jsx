@@ -8,6 +8,8 @@ import MenuScreen from "./menu.screen";
 import ConditionsScreen from "../../account/screens/conditions.screen";
 import CredentialsScreen from "./credentials.screen";
 import ManageInterest from "./manage-interest.screen";
+import EditProfileScreen from "./edit-profile.screen";
+import CameraScreen from "./camera.screen";
 
 const screenOptions = {
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -40,6 +42,14 @@ const SettingsScreen = () => {
             <SettingStack.Screen
                 name="Manage interests"
                 component={ManageInterest}
+            />
+            <SettingStack.Screen
+                name="Edit profile"
+                component={EditProfileScreen}
+            />
+            <SettingStack.Screen
+                name="Camera"
+                component={CameraScreen}
             />
         </SettingStack.Navigator>
     );

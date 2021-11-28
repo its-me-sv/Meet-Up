@@ -11,7 +11,11 @@ const MenuScreen = ({ resetUser, navigation }) => {
     return (
         <MenuContainer>
             <SettingItem icon="user" field="View account" />
-            <SettingItem icon="edit" field="Edit profile" />
+            <SettingItem 
+                icon="edit" 
+                field="Edit profile" 
+                callBack={() => navigation.navigate("Edit profile")}
+            />
             <SettingItem 
                 icon="list" 
                 field="Manage interests" 

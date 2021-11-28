@@ -5,7 +5,6 @@ const multerConfig = multerInstance => {
         },
         filename: (req, file, cb) => {
             let fileType = file.originalname.split('.').slice(-1)[0];
-            fileType = "png";
             let filename = `${req.body.userId}.${fileType}`;
             req.fileDest = `/images/${filename}`;
             cb(null, filename);

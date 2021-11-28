@@ -66,3 +66,16 @@ export const removeInterestFromDB = (userId, interestId) => dispatch => {
     ).then(() => dispatch(removeInterest(interestId)))
     .catch(console.log);
 };
+
+export const setProfilePictureUrl = data => ({
+    type: userTypes.SET_PROFILE_PICTURE,
+    payload: data
+});
+
+export const setProfilePicture = (userId, profileUrl) => dispatch => {
+    axios.put(`http://192.168.29.97:5000/user/${userId}`, {
+        userId,
+        profilePicture: profileUrl
+    }).then(() => dispatch(setProfilePictureUrl(profileUrl)))
+    .catch(() => dispatch(setProfilePictureUrl("")));
+};
