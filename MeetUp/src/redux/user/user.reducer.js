@@ -18,6 +18,22 @@ const UserReducer = (state = INITIAL_STATE, action) => {
             return {isPending: false, error: null, user: null};
         case userTypes.CHANGE_SUCCESS:
             return {isPending: false, error: null, user: {...state.user, ...action.payload}};
+        case userTypes.REMOVE_INTEREST:
+            return {
+                ...state, 
+                user: {
+                    ...state.user,
+                    interests: state.user.interests.filter(({_id}) => _id !== action.payload)
+                }
+            };
+        case userTypes.SET_INTEREST:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    interests: action.payload
+                }
+            };
         default:
             return state;
     }

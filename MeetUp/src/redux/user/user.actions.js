@@ -19,11 +19,21 @@ export const fetchUserFailure = err => ({
     payload: err
 });
 
-export const fetchUserStart = body => dispatch => {
-    dispatch(fetchUserPending());
-    axios.post("http://192.168.29.97:5000/auth/login", body)
-    .then(({data}) => dispatch(fetchUserSuccess(data)))
-    .catch(() => dispatch(fetchUserFailure("Invalid login credentials")));
+export const setInterest = data => ({
+    type: userTypes.SET_INTEREST,
+    payload: data
+});
+
+export const fetchUserStart = body => async dispatch => {
+    dispatch(fetchUserPending()); 
+    try {
+        const { data } = await axios.post("http://192.168.29.97:5000/auth/login", body);
+        dispatch(fetchUserSuccess(data));
+        const response = await axios.get(`http://192.168.29.97:5000/interest/${data._id}`);
+        dispatch(setInterest(response.data));
+    } catch (err) {
+        dispatch(fetchUserFailure("Invalid login credentials"));
+    }
 };
 
 export const changeSuccess = obj => ({
@@ -42,4 +52,17 @@ export const changeCredentials = body => async dispatch => {
         dispatch(fetchUserFailure("Credentials already in use"));
         return false;
     }
+};
+
+export const removeInterest = interestId => ({
+    type: userTypes.REMOVE_INTEREST,
+    payload: interestId
+});
+
+export const removeInterestFromDB = (userId, interestId) => dispatch => {
+    axios.put(
+        `http://192.168.29.97:5000/interest/${interestId}/remove`, 
+        {userId}
+    ).then(() => dispatch(removeInterest(interestId)))
+    .catch(console.log);
 };

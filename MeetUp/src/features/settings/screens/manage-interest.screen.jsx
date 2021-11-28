@@ -1,36 +1,40 @@
 import React from "react";
 import { ScrollView } from "react-native";
-
-const dummyInterests = [
-    "apple",
-    "ball",
-    "cat",
-    "dog",
-    "egg",
-    "frog",
-    "goat",
-    "Meet up is good",
-    "apple",
-    "ball",
-    "cat",
-    "dog",
-    "egg",
-    "frog",
-    "goat",
-    "Meet up is good"
-];
+import { connect } from "react-redux";
 
 import InterestCard from "../components/interest-card.component";
 import Spacer from "../../../components/spacer/spacer.component";
+import {
+    removeInterestFromDB
+} from "../../../redux/user/user.actions";
 
-const ManageInterest = ({ interests = dummyInterests}) => {
-    console.log(interests);
+const ManageInterest = ({ userId, userInterests, removeInterest }) => {
     return (
         <ScrollView>
-            {interests.map(val => <InterestCard val={val} />)}
+            {userInterests.map(
+                value => (
+                    <InterestCard 
+                    key={value._id}
+                    cb={() => removeInterest(userId, value._id)}
+                    {...value} 
+                    />
+                )
+            )}
             <Spacer size="large" />
         </ScrollView>
     );
 };
 
-export default ManageInterest;
+const mapStateToProps = ({user}) => ({
+    userInterests: user.user.interests,
+    userId: user.user._id
+});
+
+const mapDispatchToProps = dispatch => ({
+    removeInterest: (id1, id2) => dispatch(removeInterestFromDB(id1, id2))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ManageInterest);

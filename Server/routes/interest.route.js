@@ -49,4 +49,16 @@ router.put("/:interestId/remove", async (req, res) => {
     }
 });
 
+// Get interests of user
+router.get("/:userId", async (req, res) => {
+    try {
+        const interests = await Interest.find({
+            people: { $in: [req.params.userId] }
+        }, 'name _id');
+        return res.status(200).json(interests);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+});
+
 module.exports = router;
