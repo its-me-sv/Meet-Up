@@ -103,14 +103,14 @@ const RegisterScreen = ({
                         onPress={onCreate}
                         loading={pending}
                         disabled={pending}
-                        color="#453a94"
+                        color="#2c2929"
                     >Create</AuthButton>
                     <Spacer size="large" />
                     <Text>Already a member ?</Text>
                     <AuthButton
                         onPress={() => navigation.navigate("Login")}
                         tiny={true} 
-                        color="#453a94"
+                        color="#946ae0"
                     >Login to account</AuthButton>
                 </AccountForm>
             </AccountContainer>
