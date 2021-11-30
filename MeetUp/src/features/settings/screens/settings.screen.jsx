@@ -24,9 +24,7 @@ const TermsAndPolicies = () => <ConditionsScreen fromSettings={true} />;
 
 const SettingsScreen = () => {
     return (
-        <SettingStack.Navigator
-            screenOptions={screenOptions}
-        >
+        <SettingStack.Navigator screenOptions={screenOptions}>
             <SettingStack.Screen 
                 name="Settings"
                 options={{

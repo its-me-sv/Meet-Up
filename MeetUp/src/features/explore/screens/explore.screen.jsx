@@ -9,14 +9,11 @@ import {
     TextVariant2,
  } from "../../settings/screens/view-account.styles";
 import InterestCard from "../../settings/components/interest-card.component";
-import { 
-    removeInterestFromDB 
-} from "../../../redux/user/user.actions";
 import PersonCard from "../../settings/components/person-card.component";
 
 const windowHeight = Dimensions.get("window").height;
 
-const ExploreScreen = ({ userInterests, userId, removeInterest, userFriends }) => {
+const ExploreScreen = ({ userInterests, userFriends }) => {
     const [people, setPeople] = useState([]);
     const [interest, setInterest] = useState([]);
     useEffect(() => {
@@ -46,7 +43,6 @@ const ExploreScreen = ({ userInterests, userId, removeInterest, userFriends }) =
                             value => (
                                 <InterestCard
                                     key={value._id}
-                                    remove={() => removeInterest(userId, value._id)}
                                     {...value}
                                     fromExplore={true}
                                 />
@@ -83,15 +79,9 @@ const ExploreScreen = ({ userInterests, userId, removeInterest, userFriends }) =
 
 const mapStateToProps = ({ user }) => ({
     userInterests: user.user.interests,
-    userFriends: user.user.friends,
-    userId: user.user._id
-});
-
-const mapDispatchToProps = dispatch => ({
-    removeInterest: (id1, id2) => dispatch(removeInterestFromDB(id1, id2))
+    userFriends: user.user.friends
 });
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(ExploreScreen);

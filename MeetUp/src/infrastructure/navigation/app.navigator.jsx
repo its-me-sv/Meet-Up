@@ -4,13 +4,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { View, Text } from "react-native";
 
 import SettingsScreen from "../../features/settings/screens/settings.screen";
-import ExploreScreen from "../../features/explore/screens/explore.screen";
+import ExploreMenu from "../../features/explore/screens/explore-menu.screen";
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
     Chat: "chatbox",
-    Explore: "search",
+    Explor: "search",
     Setting: "settings"
 };
 
@@ -38,7 +38,7 @@ const AppNavigator = () => {
     return (
         <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen name="Chat" component={ChatScreen} />
-            <Tab.Screen name="Explore" component={ExploreScreen} />
+            <Tab.Screen name="Explor" component={ExploreMenu} options={{headerShown: false}}/>
             <Tab.Screen name="Setting" component={SettingsScreen} options={{headerShown: false}}/>
         </Tab.Navigator>
     );
