@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, Dimensions } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Divider } from "react-native-paper";
 import { connect } from "react-redux";
 
@@ -10,8 +10,11 @@ import {
  } from "../../settings/screens/view-account.styles";
 import InterestCard from "../../settings/components/interest-card.component";
 import PersonCard from "../../settings/components/person-card.component";
-
-const windowHeight = Dimensions.get("window").height;
+import {
+    ExploreContainer,
+    InterestScroller,
+    PeopleScroller
+} from "./explore.styles";
 
 const ExploreScreen = ({ userInterests, userFriends }) => {
     const [people, setPeople] = useState([]);
@@ -23,22 +26,14 @@ const ExploreScreen = ({ userInterests, userFriends }) => {
     return (
         <ScrollView>
             <SearchBar />
-            <View style={{
-                flex: 1,
-                flexDirection: "column",
-                padding: 12,
-                paddingTop: 0,
-                justifyContent: "space-evenly"
-            }}>
+            <ExploreContainer>
                 <View>
                     <Spacer size="medium" />
                     <Divider />
                     <Spacer size="medium" />
                     <TextVariant2>Interests</TextVariant2>
                     <Spacer size="medium" />
-                    <ScrollView style={{
-                        height: (windowHeight * 28) / 100,
-                    }}>
+                    <InterestScroller>
                         {interest.map(
                             value => (
                                 <InterestCard
@@ -48,7 +43,7 @@ const ExploreScreen = ({ userInterests, userFriends }) => {
                                 />
                             )
                         )}
-                    </ScrollView>
+                    </InterestScroller>
                     <Spacer size="large" />
                 </View>
                 <View>
@@ -56,9 +51,7 @@ const ExploreScreen = ({ userInterests, userFriends }) => {
                     <Spacer size="medium" />
                     <TextVariant2>People</TextVariant2>
                     <Spacer size="medium" />
-                    <ScrollView style={{
-                        height: (windowHeight * 31) / 100
-                    }}>
+                    <PeopleScroller>
                         {people.map(({ _id, username, profilePicture: pp, email: friendEmail }) => {
                             return (
                                 <PersonCard 
@@ -70,9 +63,9 @@ const ExploreScreen = ({ userInterests, userFriends }) => {
                                 />
                             );
                         })}
-                    </ScrollView>
+                    </PeopleScroller>
                 </View>
-            </View>
+            </ExploreContainer>
         </ScrollView>
     );
 };
