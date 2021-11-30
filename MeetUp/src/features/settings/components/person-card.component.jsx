@@ -47,11 +47,11 @@ const PersonCard = ({
                 <TextVariant3>{email}</TextVariant3>
             </View>
             {
-                !fromProfile && (
+                (!fromProfile && userId !== id)&& (
                     <>{
                         isFriend
-                            ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
-                            : <AddButton onPress={() => addFriend(userId, friend)}>Add</AddButton>
+                        ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
+                        : <AddButton onPress={() => addFriend(userId, friend)}>Add</AddButton>
                     }</>
                 )
             }

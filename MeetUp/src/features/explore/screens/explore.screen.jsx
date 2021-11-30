@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Divider } from "react-native-paper";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import SearchBar from "../components/search.component";
 import Spacer from "../../../components/spacer/spacer.component";
@@ -23,9 +24,18 @@ const ExploreScreen = ({ userInterests, userFriends }) => {
         setPeople(userFriends);
         setInterest(userInterests);
     }, []);
+    const fetchByKeyword = keyword => {
+        if (keyword.trim().length === 0) return;
+        axios.get(`http://192.168.29.97:5000/user/find/${keyword}`)
+        .then(({data}) => setPeople(data))
+        .then(console.log);
+        axios.get(`http://192.168.29.97:5000/interest/find/${keyword}`)
+        .then(({data}) => setInterest(data))
+        .then(console.log);
+    };
     return (
         <ScrollView>
-            <SearchBar />
+            <SearchBar cb={fetchByKeyword} />
             <ExploreContainer>
                 <View>
                     <Spacer size="medium" />
