@@ -52,11 +52,12 @@ export const InterestHolder = styled(Chip).attrs({
     mode: "outlined",
     textStyle: {color: "white"}
 })`
-    margin-right: 7px;
+    margin-right: 3px;
     margin-top: 4px;
-    padding: 2px;
-    elevation: 4;
-    ${({ color }) => `background-color: ${color};`}
+    /* padding: 2px; */
+    /* elevation: 4; */
+    /* ${({ color }) => `background-color: ${color};`} */
+    background-color: #2c2929;
 `;
 
 export const FriendContainer = styled.View`

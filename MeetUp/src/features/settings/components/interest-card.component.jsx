@@ -6,9 +6,9 @@ import {
     RemoveButton
 } from "./interest-card.styles";
 
-const InterestCard = ({name, cb}) => {
+const InterestCard = ({name, cb, fromExplore}) => {
     return (
-        <CardContainer>
+        <CardContainer explore={fromExplore}>
             <Text>{name}</Text>
             <RemoveButton onPress={cb}>Remove</RemoveButton>
         </CardContainer>

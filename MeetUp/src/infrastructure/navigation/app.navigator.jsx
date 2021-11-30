@@ -31,15 +31,7 @@ const screenOptions = ({ route }) => ({
     tabBarActiveTintColor: 'black',
     tabBarInactiveTintColor: 'gray',
     tabBarShowLabel: false,
-    // tabBarStyle: {
-    //     backgroundColor: '#453a94'
-    // },
-    // headerStyle: {
-    //     backgroundColor: '#453a94',
-    // },
-    // headerTitleStyle: {
-    //     color: 'white'
-    // }
+    tabBarHideOnKeyboard: true
 });
 
 const AppNavigator = () => {

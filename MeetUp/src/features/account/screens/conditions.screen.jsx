@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import SafeArea from "../../../components/utility/safe-area.component";
 import termsAndConditions from "../../../utils/terms-and-conditions";

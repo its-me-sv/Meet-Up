@@ -90,8 +90,8 @@ const ViewAccount = ({ user }) => {
                     <InteresetWrapper>
                         {[...user.interests].map(({_id, name}, idx) => (
                             <InterestHolder
-                                key={_id} 
-                                color={colors[idx%colors.length]}
+                                key={_id}
+                                // color={colors[idx%colors.length]}
                             >{name}</InterestHolder>
                         ))}
                     </InteresetWrapper>
