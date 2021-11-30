@@ -42,6 +42,38 @@ const UserReducer = (state = INITIAL_STATE, action) => {
                     profilePicture: action.payload
                 }
             };
+        case userTypes.ADD_INTEREST:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    interests: [...state.user.interests, action.payload]
+                }
+            };
+        case userTypes.ADD_FRIEND:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    friends: [...state.user.friends, action.payload]
+                }
+            };
+        case userTypes.REMOVE_FRIEND:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    friends: state.user.friends.filter(({ _id }) => _id !== action.payload)
+                }
+            };
+        case userTypes.SET_FRIENDS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    friends: action.payload
+                }
+            };
         default:
             return state;
     }

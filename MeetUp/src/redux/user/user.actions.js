@@ -24,6 +24,11 @@ export const setInterest = data => ({
     payload: data
 });
 
+export const setFriends = data => ({
+    type: userTypes.SET_FRIENDS,
+    payload: data
+});
+
 export const fetchUserStart = body => async dispatch => {
     dispatch(fetchUserPending()); 
     try {
@@ -31,6 +36,8 @@ export const fetchUserStart = body => async dispatch => {
         dispatch(fetchUserSuccess(data));
         const response = await axios.get(`http://192.168.29.97:5000/interest/${data._id}`);
         dispatch(setInterest(response.data));
+        const response1 = await axios.get(`http://192.168.29.97:5000/user/friends/${data._id}`);
+        dispatch(setFriends(response1.data));
     } catch (err) {
         dispatch(fetchUserFailure("Invalid login credentials"));
     }
@@ -78,4 +85,43 @@ export const setProfilePicture = (userId, profileUrl) => dispatch => {
         profilePicture: profileUrl
     }).then(() => dispatch(setProfilePictureUrl(profileUrl)))
     .catch(() => dispatch(setProfilePictureUrl("")));
+};
+
+export const addInterest = (interestId, name) => ({
+    type: userTypes.ADD_INTEREST,
+    payload: {_id: interestId, name}
+});
+
+export const addInterestToDB = (userId, interestId, name) => dispatch => {
+    axios.put(
+        `http://192.168.29.97:5000/interest/${interestId}/add`,
+        {userId}
+    ).then(() => dispatch(addInterest(interestId, name)))
+    .catch(console.log);
+};
+
+export const removeFriend = friendId => ({
+    type: userTypes.REMOVE_FRIEND,
+    payload: friendId
+});
+
+export const addFriend = friend => ({
+    type: userTypes.ADD_FRIEND,
+    payload: friend
+});
+
+export const removeFriendFromDB = (userId, FriendId) => dispatch => {
+    axios.put(
+        `http://192.168.29.97:5000/user/${FriendId}/remove-friend`,
+        { userId }
+    ).then(() => dispatch(removeFriend(FriendId)))
+    .catch(console.log);
+};
+
+export const addFriendToDB = (userId, friend) => dispatch => {
+    axios.put(
+        `http://192.168.29.97:5000/user/${friend._id}/add-friend`,
+        { userId }
+    ).then(() => dispatch(addFriend(friend)))
+    .catch(console.log);
 };

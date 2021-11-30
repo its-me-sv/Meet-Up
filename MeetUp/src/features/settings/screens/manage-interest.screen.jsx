@@ -15,7 +15,7 @@ const ManageInterest = ({ userId, userInterests, removeInterest }) => {
                 value => (
                     <InterestCard 
                     key={value._id}
-                    cb={() => removeInterest(userId, value._id)}
+                    remove={() => removeInterest(userId, value._id)}
                     {...value} 
                     />
                 )

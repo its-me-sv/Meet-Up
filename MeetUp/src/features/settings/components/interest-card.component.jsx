@@ -3,14 +3,16 @@ import React from "react";
 import Text from "../../../components/typography/text.component";
 import {
     CardContainer,
-    RemoveButton
+    RemoveButton,
+    AddButton
 } from "./interest-card.styles";
 
-const InterestCard = ({name, cb, fromExplore}) => {
+const InterestCard = ({name, remove, fromExplore, add}) => {
     return (
         <CardContainer explore={fromExplore}>
             <Text>{name}</Text>
-            <RemoveButton onPress={cb}>Remove</RemoveButton>
+            {remove && <RemoveButton onPress={remove}>Remove</RemoveButton>}
+            {add && <AddButton onPress={add}>Add</AddButton>}
         </CardContainer>
     );
 }

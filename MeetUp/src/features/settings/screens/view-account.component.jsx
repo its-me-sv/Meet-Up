@@ -3,7 +3,6 @@ import { ScrollView, View } from "react-native";
 import { connect } from "react-redux";
 import { Avatar, Divider } from "react-native-paper";
 import { format } from "timeago.js";
-import axios from "axios";
 
 import Spacer from "../../../components/spacer/spacer.component";
 import {
@@ -16,24 +15,12 @@ import {
     TextVariant3,
     RightEndText,
     InteresetWrapper,
-    InterestHolder,
-    FriendContainer
+    InterestHolder
 } from "./view-account.styles";
+import PersonCard from "../components/person-card.component";
 
 const defaultUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 const baseUrl = "http://192.168.29.97:5001";
-
-const colors = [
-    '#16a085',
-    '#27ae60',
-    '#f39c12',
-    '#e74c3c',
-    '#FB6964',
-    '#BDBB99',
-    '#77B1A9',
-    '#73A857',
-    '#ff3333'
-];
 
 const months = [
     "January", "February", "March", "April", "May", "June", 
@@ -49,14 +36,8 @@ const formatTime = date => {
 };
 
 const ViewAccount = ({ user }) => {
-    const { profilePicture, _id } = user;
-    const [friends, setFriends] = useState([]);
+    const { profilePicture, friends } = user;
     const imageUrl = profilePicture.length ? baseUrl + profilePicture : defaultUrl;
-    useEffect(() => {
-        axios.get(`http://192.168.29.97:5000/user/friends/${_id}`)
-        .then(({data}) => setFriends(data))
-        .catch(console.log);
-    }, []);
     return (
         <ScrollView>
             <AccountContainer>
@@ -104,19 +85,15 @@ const ViewAccount = ({ user }) => {
                     <Spacer size="medium" />
                     <ScrollView>
                     {
-                        [...friends].map(({_id, username, profilePicture: pp}) => {
-                            const friendPp = pp.length ? baseUrl + pp : defaultUrl;
+                        [...friends].map(({_id, username, profilePicture: pp, email: friendEmail}) => {
                             return (
-                                <FriendContainer key={_id}>
-                                    <Spacer size="medium" position="left"/>
-                                    <Avatar.Image
-                                        size={49}
-                                        source={{uri: friendPp + `?${new Date()}`}}
-                                    />
-                                    <Spacer size="small" position="left" />
-                                    <Spacer size="small" position="left" />
-                                    <TextVariant2>{username}</TextVariant2>
-                                </FriendContainer>
+                                <PersonCard 
+                                    key={_id}
+                                    id={_id}
+                                    picture={pp}
+                                    username={username}
+                                    email={friendEmail}
+                                />
                             );
                         })
                     }
