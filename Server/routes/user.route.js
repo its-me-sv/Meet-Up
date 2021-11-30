@@ -114,7 +114,7 @@ router.get("/find/:keyword", async (req, res) => {
         const allUsers = await User.find({$or: [
             { username: {$regex: re}}, 
             { email: {$regex: re}}
-        ]});
+        ]}, '_id username email profilePicture');
         return res.status(200).json(allUsers);
     } catch (err) {
         return res.status(500).json(err.message);

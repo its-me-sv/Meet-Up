@@ -61,4 +61,16 @@ router.get("/:userId", async (req, res) => {
     }
 });
 
+// Get keyword specific
+router.get("/find/:keyword", async (req, res) => {
+    try {
+        const { keyword } = req.params;
+        const re = new RegExp(keyword, 'i');
+        const allUsers = await Interest.find({ name: { $regex: re }}, '_id name');
+        return res.status(200).json(allUsers);
+    } catch (err) {
+        return res.status(500).json(err.message);
+    }
+});
+
 module.exports = router;
