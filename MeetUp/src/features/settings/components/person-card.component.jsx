@@ -24,7 +24,8 @@ const baseUrl = "http://192.168.29.97:5001";
 const PersonCard = ({
     id, picture, username, 
     email, friends, userId,
-    addFriend, removeFriend
+    addFriend, removeFriend,
+    fromProfile
 }) => {
     const friendPp = picture.length ? baseUrl + picture : defaultUrl;
     const friend = {};
@@ -46,9 +47,13 @@ const PersonCard = ({
                 <TextVariant3>{email}</TextVariant3>
             </View>
             {
-                isFriend
-                ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
-                : <AddButton onPress={() => addFriend(userId, friend)}>Add</AddButton>
+                !fromProfile && (
+                    <>{
+                        isFriend
+                            ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
+                            : <AddButton onPress={() => addFriend(userId, friend)}>Add</AddButton>
+                    }</>
+                )
             }
             <Spacer size="medium" position="right" />
         </FriendContainer>

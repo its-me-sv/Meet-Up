@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View, Dimensions } from "react-native";
-import { Divider, Avatar } from "react-native-paper";
+import { Divider } from "react-native-paper";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import SearchBar from "../components/search.component";
 import Spacer from "../../../components/spacer/spacer.component";
 import { 
     TextVariant2,
-    FriendContainer
  } from "../../settings/screens/view-account.styles";
 import InterestCard from "../../settings/components/interest-card.component";
 import { 
@@ -17,11 +15,14 @@ import {
 import PersonCard from "../../settings/components/person-card.component";
 
 const windowHeight = Dimensions.get("window").height;
-const defaultUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
-const baseUrl = "http://192.168.29.97:5001";
 
 const ExploreScreen = ({ userInterests, userId, removeInterest, userFriends }) => {
-    const [people, setPeople] = useState(userFriends);
+    const [people, setPeople] = useState([]);
+    const [interest, setInterest] = useState([]);
+    useEffect(() => {
+        setPeople(userFriends);
+        setInterest(userInterests);
+    }, []);
     return (
         <ScrollView>
             <SearchBar />
@@ -41,7 +42,7 @@ const ExploreScreen = ({ userInterests, userId, removeInterest, userFriends }) =
                     <ScrollView style={{
                         height: (windowHeight * 28) / 100,
                     }}>
-                        {userInterests.map(
+                        {interest.map(
                             value => (
                                 <InterestCard
                                     key={value._id}
@@ -62,7 +63,7 @@ const ExploreScreen = ({ userInterests, userId, removeInterest, userFriends }) =
                     <ScrollView style={{
                         height: (windowHeight * 31) / 100
                     }}>
-                        {[...people].map(({ _id, username, profilePicture: pp, email: friendEmail }) => {
+                        {people.map(({ _id, username, profilePicture: pp, email: friendEmail }) => {
                             return (
                                 <PersonCard 
                                     key={_id}

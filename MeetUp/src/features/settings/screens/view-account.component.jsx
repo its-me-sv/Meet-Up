@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ScrollView, View } from "react-native";
 import { connect } from "react-redux";
 import { Avatar, Divider } from "react-native-paper";
@@ -72,7 +72,6 @@ const ViewAccount = ({ user }) => {
                         {[...user.interests].map(({_id, name}, idx) => (
                             <InterestHolder
                                 key={_id}
-                                // color={colors[idx%colors.length]}
                             >{name}</InterestHolder>
                         ))}
                     </InteresetWrapper>
@@ -85,7 +84,7 @@ const ViewAccount = ({ user }) => {
                     <Spacer size="medium" />
                     <ScrollView>
                     {
-                        [...friends].map(({_id, username, profilePicture: pp, email: friendEmail}) => {
+                        friends.map(({_id, username, profilePicture: pp, email: friendEmail}) => {
                             return (
                                 <PersonCard 
                                     key={_id}
@@ -93,6 +92,7 @@ const ViewAccount = ({ user }) => {
                                     picture={pp}
                                     username={username}
                                     email={friendEmail}
+                                    fromProfile={true}
                                 />
                             );
                         })
