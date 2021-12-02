@@ -2,6 +2,8 @@ import React from "react";
 import { View } from "react-native";
 import { Avatar } from "react-native-paper";
 import { connect } from "react-redux";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Spacer from "../../../components/spacer/spacer.component";
 import {
@@ -28,6 +30,7 @@ const PersonCard = ({
     fromProfile
 }) => {
     const friendPp = picture.length ? baseUrl + picture : defaultUrl;
+    const navigation = useNavigation();
     const friend = {};
     friend["_id"] = id;
     friend["username"] = username;
@@ -35,28 +38,30 @@ const PersonCard = ({
     friend["profilePicture"] = picture;
     const isFriend = friends.filter(f => f._id === id).length === 1;
     return (
-        <FriendContainer>
-            <Spacer size="medium" position="left" />
-            <Avatar.Image
-                size={49}
-                source={{ uri: friendPp + `?${new Date()}` }}
-            />
-            <Spacer size="small" position="left" />
-            <View>
-                <TextVariant2>{username}</TextVariant2>
-                <TextVariant3>{email}</TextVariant3>
-            </View>
-            {
-                (!fromProfile && userId !== id)&& (
-                    <>{
-                        isFriend
-                        ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
-                        : <AddButton onPress={() => addFriend(userId, friend)}>Add</AddButton>
-                    }</>
-                )
-            }
-            <Spacer size="medium" position="right" />
-        </FriendContainer>
+        <TouchableOpacity onPress={() => navigation.navigate("Person Profile", {id})}>
+            <FriendContainer>
+                <Spacer size="medium" position="left" />
+                <Avatar.Image
+                    size={49}
+                    source={{ uri: friendPp + `?${new Date()}` }}
+                />
+                <Spacer size="small" position="left" />
+                <View>
+                    <TextVariant2>{username}</TextVariant2>
+                    <TextVariant3>{email}</TextVariant3>
+                </View>
+                {
+                    (!fromProfile && userId !== id)&& (
+                        <>{
+                            isFriend
+                            ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
+                            : <AddButton onPress={() => addFriend(userId, friend)}>Add</AddButton>
+                        }</>
+                    )
+                }
+                <Spacer size="medium" position="right" />
+            </FriendContainer>
+        </TouchableOpacity>
     );
 };
 

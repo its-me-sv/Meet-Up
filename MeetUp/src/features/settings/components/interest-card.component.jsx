@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Text from "../../../components/typography/text.component";
 import {
@@ -16,20 +18,22 @@ import {
 const InterestCard = ({
     _id: id, name, fromExplore,
     userId, userInterests,
-    addInterest, removeInterest
+    addInterest, removeInterest,
 }) => {
-    console.log(userInterests);
+    const navigation = useNavigation();
     const isInterest = userInterests.filter(({_id}) => _id === id).length === 1;
     return (
-        <CardContainer explore={fromExplore}>
-            <Text>{name}</Text>
-            {
-                isInterest 
-                ? <RemoveButton onPress={() => removeInterest(userId, id)}>Remove</RemoveButton>
-                : <AddButton onPress={() => addInterest(userId, id, name)}>Add</AddButton>
-            }
-            <Spacer size="medium" position="right" />
-        </CardContainer>
+        <TouchableOpacity onPress={() => navigation.navigate("Interest Profile", {id})}>
+            <CardContainer explore={fromExplore}>
+                <Text>{name}</Text>
+                {
+                    isInterest 
+                    ? <RemoveButton onPress={() => removeInterest(userId, id)}>Remove</RemoveButton>
+                    : <AddButton onPress={() => addInterest(userId, id, name)}>Add</AddButton>
+                }
+                <Spacer size="medium" position="right" />
+            </CardContainer>
+        </TouchableOpacity>
     );
 };
 

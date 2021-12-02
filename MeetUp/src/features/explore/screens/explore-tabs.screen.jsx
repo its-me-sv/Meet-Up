@@ -9,15 +9,15 @@ import InterestsTab from "./interests.screen";
 const screenOptions = {
     tabBarStyle: { backgroundColor: "#F1F1F1" },
     tabBarLabelStyle: { 
-        fontSize: 16,
+        fontSize: 18,
         textTransform: 'none'
     },
     tabBarActiveTintColor: "black",
     tabBarInactiveTintColor: "gray",
     tabBarIndicatorStyle: {
-        borderTopWidth: 2,
+        borderTopWidth: 3,
         borderTopColor: 'black',
-        borderRadius: 24
+        borderRadius: 28
     }
 };
 
