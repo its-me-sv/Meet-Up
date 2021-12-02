@@ -18,3 +18,8 @@ export const InterestScroller = styled(ScrollView)`
 export const PeopleScroller = styled(ScrollView)`
     height: ${`${(windowHeight * 31) / 100}px`};
 `;
+
+export const ExploreScroller = styled(ScrollView)`
+    padding: 7px;
+    margin-top: 7px;
+`;

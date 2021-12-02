@@ -5,6 +5,7 @@ import { View, Text } from "react-native";
 
 import SettingsScreen from "../../features/settings/screens/settings.screen";
 import ExploreMenu from "../../features/explore/screens/explore-menu.screen";
+import ExploreTabs from "../../features/explore/screens/explore-tabs.screen";
 
 const Tab = createBottomTabNavigator();
 

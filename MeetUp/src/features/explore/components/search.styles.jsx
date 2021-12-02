@@ -4,6 +4,7 @@ import { Searchbar } from 'react-native-paper';
 export const SearchContainer = styled.View`
     padding: 12px;
     width: 100%;
+    padding-bottom: 0px;
 `;
 
 export const SearchBar = styled(Searchbar).attrs({
