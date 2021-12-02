@@ -1,7 +1,7 @@
 import React from "react";
 import {
     createStackNavigator,
-    CardStyleInterpolators,
+    TransitionPresets,
 } from "@react-navigation/stack";
 
 import ExploreScreen from "./explore.screen";
@@ -9,9 +9,9 @@ import InterestProfileCard from "../../../components/profile-cards/interests-pro
 import PersonProfileCard from "../../../components/profile-cards/person-profile-card.component";
 
 const screenOptions = {
-    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     headerMode: 'screen',
-    headerTitleAlign: 'center'
+    headerTitleAlign: 'center',
+    ...TransitionPresets.ModalPresentationIOS
 };
 
 const ExploreStack = createStackNavigator();
@@ -26,12 +26,12 @@ const ExploreMenu = () => {
             />
             <ExploreStack.Screen 
                 name="Interest Profile"
-                options={{ headerTitle: "" }}
+                options={{ headerShown: false }}
                 component={InterestProfileCard}
             />
             <ExploreStack.Screen
                 name="Person Profile"
-                options={{ headerTitle: "" }}
+                options={{ headerShown: false }}
                 component={PersonProfileCard}
             />
         </ExploreStack.Navigator>
