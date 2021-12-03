@@ -4,6 +4,7 @@ import { Avatar, Divider } from "react-native-paper";
 import { format } from "timeago.js";
 import { connect } from "react-redux";
 import axios from "axios";
+import { useIsFocused } from "@react-navigation/native";
 
 import Spacer from "../spacer/spacer.component";
 import {
@@ -26,7 +27,6 @@ import {
 } from "../../redux/user/user.actions";
 import {
     AddButton,
-    RemoveButton,
     MessageButton,
     RemoveText
 } from "../../features/settings/components/interest-card.styles";
@@ -56,6 +56,7 @@ const PersonProfileCard = ({
     const [person, setPerson] = useState(null);
     const [friends, setFriends] = useState([]);
     const [interests, setInterests] = useState([]);
+    const isFocused = useIsFocused();
     useEffect(() => {
         axios.get(`http://192.168.29.97:5000/user?userId=${id}`)
         .then(({ data }) => setPerson(data))
@@ -66,7 +67,7 @@ const PersonProfileCard = ({
         axios.get(`http://192.168.29.97:5000/interest/${id}`)
         .then(({ data }) => setInterests(data))
         .catch(console.log);
-    }, []);
+    }, [isFocused, id]);
     if (!person) return <Loader />;
     const { profilePicture, _id: id1, username, email } = person;
     const imageUrl = profilePicture.length ? baseUrl + profilePicture : defaultUrl;
