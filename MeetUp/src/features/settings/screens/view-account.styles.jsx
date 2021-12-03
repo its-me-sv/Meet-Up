@@ -34,13 +34,15 @@ export const JoinedContainer = styled.View`
 export const TextVariant3 = styled.Text`
     color: black;
     font-size: 16px;
+    ${({opaque}) => opaque === true && `opacity: 0.4;`}
 `;
 
 export const RightEndText = styled.Text`
-    color: #343131;
+    color: black;
     font-size: 16px;
     margin-top: auto;
     margin-left: auto;
+    opacity: 0.5;
 `;
 
 export const InteresetWrapper = styled.View`
