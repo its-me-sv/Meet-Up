@@ -4,7 +4,7 @@ import { Chip } from "react-native-paper";
 export const AccountContainer = styled.View`
     flex: 1;
     flex-direction: column;
-    margin: 21px;
+    margin: 7px;
 `;
 
 export const ProfileTop = styled.View`
@@ -52,14 +52,16 @@ export const InteresetWrapper = styled.View`
 
 export const InterestHolder = styled(Chip).attrs({
     mode: "outlined",
-    textStyle: {color: "white"}
+    textStyle: {color: "black"}
 })`
     margin-right: 3px;
     margin-top: 4px;
     /* padding: 2px; */
     /* elevation: 4; */
     /* ${({ color }) => `background-color: ${color};`} */
-    background-color: #2c2929;
+    /* background-color: #2c2929; */
+    background-color: #F1F1F1;
+    border-color: black;
 `;
 
 export const FriendContainer = styled.View`

@@ -26,7 +26,9 @@ import {
 } from "../../redux/user/user.actions";
 import {
     AddButton,
-    RemoveButton
+    RemoveButton,
+    MessageButton,
+    RemoveText
 } from "../../features/settings/components/interest-card.styles";
 
 const defaultUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
@@ -91,12 +93,17 @@ const PersonProfileCard = ({
                     {(userId !== id) && (
                         <View style={{
                             marginLeft: "auto",
-                            marginTop: "auto"
-                        }}>{
-                            isFriend
-                            ? <RemoveButton onPress={() => removeFriend(userId, id)}>Remove</RemoveButton>
-                            : <AddButton onPress={() => addFriend(userId, personReduced)}>Add</AddButton>
-                        }</View>
+                            marginTop: "auto",
+                            flexDirection: "row"
+                        }}>
+                            <MessageButton>Message</MessageButton>
+                            <Spacer position="left" size="medium" />
+                            {
+                                isFriend
+                                ? <RemoveText onPress={() => removeFriend(userId, id)}>Remove</RemoveText>
+                                : <AddButton onPress={() => addFriend(userId, personReduced)}>Add</AddButton>
+                            }
+                        </View>
                     )}
                 </ProfileTop>
                 <Divider />

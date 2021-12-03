@@ -40,3 +40,17 @@ export const AddButton = styled(Button).attrs({
 })`
     margin-left: auto;
 `;
+
+export const MessageButton = styled(Button).attrs({
+    mode: "contained",
+    color: "#d2d2d7",
+    icon: "message",
+    compact: true,
+    labelStyle: { color: "black" }
+})``;
+
+export const RemoveText = styled(Button).attrs({
+    color: "#D0421B",
+    icon: "minus-circle-outline",
+    compact: true,
+})``;
