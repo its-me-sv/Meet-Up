@@ -15,7 +15,6 @@ import ViewAccount from "./view-account.component";
 const screenOptions = {
     headerMode: 'screen',
     headerTitleAlign: 'center',
-    ...TransitionPresets.ModalPresentationIOS,
 };
 
 const SettingStack = createStackNavigator();
@@ -35,32 +34,30 @@ const SettingsScreen = () => {
             <SettingStack.Screen
                 name="Terms and Policies"
                 component={TermsAndPolicies}
-                options={{ headerShown: false }}
+                options={{ 
+                    headerShown: false,
+                    ...TransitionPresets.ModalPresentationIOS
+                }}
             />
             <SettingStack.Screen
                 name="Change credentials"
                 component={CredentialsScreen}
-                options={{ headerShown: false }}
             />
             <SettingStack.Screen
                 name="Manage interests"
                 component={ManageInterest}
-                options={{ headerShown: false }}
             />
             <SettingStack.Screen
                 name="Edit profile"
                 component={EditProfileScreen}
-                options={{ headerShown: false }}
             />
             <SettingStack.Screen
                 name="Camera"
                 component={CameraScreen}
-                options={{ headerShown: false }}
             />
             <SettingStack.Screen
                 name="Account"
                 component={ViewAccount}
-                options={{ headerShown: false }}
             />
         </SettingStack.Navigator>
     );

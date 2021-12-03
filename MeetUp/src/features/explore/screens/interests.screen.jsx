@@ -5,7 +5,6 @@ import InterestCard from "../../settings/components/interest-card.component";
 import { ExploreScroller } from "./explore.styles";
 
 const InterestsTab = ({ interests }) => {
-    console.log(interests.length, "interests");
     return (
         <ExploreScroller>
             {interests.map(

@@ -5,7 +5,6 @@ import PersonCard from "../../settings/components/person-card.component";
 import { ExploreScroller } from "./explore.styles";
 
 const PeopleTab = ({ people }) => {
-    console.log(people.length, "people");
     return (
         <ExploreScroller>
             {people.map(({ _id, username, profilePicture: pp, email: friendEmail }) => {
