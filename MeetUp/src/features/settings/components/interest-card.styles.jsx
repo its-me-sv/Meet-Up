@@ -24,33 +24,36 @@ export const CardContainer = styled.View`
 `;
 
 export const RemoveButton = styled(Button).attrs({
-    mode: "contained",
-    color: "#D0421B",
-    icon: "minus-circle-outline",
+    mode: "outlined",
+    color: "#2c2929",
+    // icon: "minus-circle-outline",
     compact: true
 })`
     margin-left: auto;
+    width: 90px;
 `;
 
 export const AddButton = styled(Button).attrs({
     mode: "contained",
-    color: "#138000",
-    icon: "plus-circle-outline",
+    color: "#2c2929",
+    // icon: "plus-circle-outline",
     compact: true
 })`
     margin-left: auto;
+    width: 90px;
 `;
 
 export const MessageButton = styled(Button).attrs({
     mode: "contained",
     color: "#d2d2d7",
-    icon: "message",
+    // icon: "message",
     compact: true,
     labelStyle: { color: "black" }
 })``;
 
 export const RemoveText = styled(Button).attrs({
-    color: "#D0421B",
-    icon: "minus-circle-outline",
+    mode: "outlined",
+    color: "#2c2929",
+    // icon: "minus-circle-outline",
     compact: true,
 })``;
