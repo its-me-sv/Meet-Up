@@ -73,4 +73,27 @@ router.get("/find/:keyword", async (req, res) => {
     }
 });
 
+// Get people of interests
+router.get("/people/:interestId", async (req, res) => {
+    try {
+        const people = await User.find({
+            interests: { $in: [req.params.interestId] }
+        });
+        let filteredPeople = people.map(({ _id, username, profilePicture, email }) => ({ _id, username, profilePicture, email}));
+        return res.status(200).json(filteredPeople);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+});
+
+// Get interest
+router.get("/origin/:interestId", async (req, res) => {
+    try {
+        const interest = await Interest.findById(req.params.interestId);
+        return res.status(200).json(interest);
+    } catch (err) {
+        return res.status(500).json(err.message);
+    }
+});
+
 module.exports = router;

@@ -45,10 +45,10 @@ export const AddButton = styled(Button).attrs({
 
 export const MessageButton = styled(Button).attrs({
     mode: "contained",
-    color: "#d2d2d7",
+    color: "#2c2929",
     // icon: "message",
     compact: true,
-    labelStyle: { color: "black" }
+    // labelStyle: { color: "black" }
 })``;
 
 export const RemoveText = styled(Button).attrs({
