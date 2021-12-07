@@ -19,7 +19,6 @@ const InterestProfileCard = ({ route }) => {
         .catch(console.log);
     }, [isFocused, id]);
     if (!interest) return <Loader />;
-    console.log(people);
     return (
         <View style={{
             flex: 1,
