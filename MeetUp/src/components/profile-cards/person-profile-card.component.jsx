@@ -16,8 +16,7 @@ import {
     JoinedContainer,
     TextVariant3,
     RightEndText,
-    InteresetWrapper,
-    InterestHolder
+    InteresetWrapper
 } from "../../features/settings/screens/view-account.styles";
 import PersonCard from "../../features/settings/components/person-card.component";
 import Loader from "../loader/loader.component";
@@ -30,6 +29,7 @@ import {
     MessageButton,
     RemoveText
 } from "../../features/settings/components/interest-card.styles";
+import InterestHolder from "../../features/settings/components/interest-holder.component"
 
 const defaultUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 const baseUrl = "http://192.168.29.97:5001";
@@ -127,6 +127,7 @@ const PersonProfileCard = ({
                         {[...interests].map(({ _id, name }, idx) => (
                             <InterestHolder
                                 key={_id}
+                                id={_id}
                             >{name}</InterestHolder>
                         ))}
                     </InteresetWrapper>
