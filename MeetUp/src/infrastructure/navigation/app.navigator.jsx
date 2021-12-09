@@ -1,11 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text } from "react-native";
 
 import SettingsScreen from "../../features/settings/screens/settings.screen";
 import ExploreMenu from "../../features/explore/screens/explore-menu.screen";
-import ExploreTabs from "../../features/explore/screens/explore-tabs.screen";
+import ChatScreen from "../../features/chat/screens/chat.screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,14 +12,6 @@ const TAB_ICON = {
     Chat: "chatbox",
     Explor: "search",
     Setting: "settings"
-};
-
-const ChatScreen = () => {
-    return (
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-            <Text>ChatScreen</Text>
-        </View>
-    );
 };
 
 const screenOptions = ({ route }) => ({
@@ -32,15 +23,16 @@ const screenOptions = ({ route }) => ({
     tabBarActiveTintColor: 'black',
     tabBarInactiveTintColor: 'gray',
     tabBarShowLabel: false,
-    tabBarHideOnKeyboard: true
+    tabBarHideOnKeyboard: true,
+    headerShown: false
 });
 
 const AppNavigator = () => {
     return (
         <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen name="Chat" component={ChatScreen} />
-            <Tab.Screen name="Explor" component={ExploreMenu} options={{headerShown: false}}/>
-            <Tab.Screen name="Setting" component={SettingsScreen} options={{headerShown: false}}/>
+            <Tab.Screen name="Explor" component={ExploreMenu} />
+            <Tab.Screen name="Setting" component={SettingsScreen} />
         </Tab.Navigator>
     );
 };
