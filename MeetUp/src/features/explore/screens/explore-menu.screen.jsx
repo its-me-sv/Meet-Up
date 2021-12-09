@@ -11,7 +11,7 @@ import PersonProfileCard from "../../../components/profile-cards/person-profile-
 const screenOptions = {
     headerMode: 'screen',
     headerTitleAlign: 'center',
-    ...TransitionPresets.ModalPresentationIOS
+    // ...TransitionPresets.ModalPresentationIOS
 };
 
 const ExploreStack = createStackNavigator();
@@ -26,12 +26,12 @@ const ExploreMenu = () => {
             />
             <ExploreStack.Screen 
                 name="Interest Profile"
-                options={{ headerShown: false }}
+                options={{ headerTitle: "" }}
                 component={InterestProfileCard}
             />
             <ExploreStack.Screen
                 name="Person Profile"
-                options={{ headerShown: false }}
+                options={{ headerTitle: "" }}
                 component={PersonProfileCard}
             />
         </ExploreStack.Navigator>
