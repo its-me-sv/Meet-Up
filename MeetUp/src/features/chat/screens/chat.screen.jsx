@@ -1,10 +1,9 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-const ChatStack = createStackNavigator();
+import ChatMenu from "./menu.screen";
 
-const ChatMenu = () => <View><Text>Chat Menu</Text></View>;
+const ChatStack = createStackNavigator();
 
 const ChatScreen = () => {
     return (
