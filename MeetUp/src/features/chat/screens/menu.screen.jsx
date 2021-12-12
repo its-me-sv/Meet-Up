@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
-import { Text } from "react-native";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import SearchBar from "../components/search.component";
 import Loader from "../../../components/loader/loader.component";
 import NoResultScreen from "../../../components/no-result-screen/no-result-screen.component"
+import { fetchConversations } from "../../../redux/conversation/conversation.actions";
+import Conversations from "../components/conversations.component";
 
-const ChatMenu = ({ userId }) => {
-    const [conversations, setConversations] = useState([]);
-    const [loading, setLoading] = useState(false);
+const ChatMenu = ({ userId, fetchConvo, loading, conversations }) => {
     const isFocused = useIsFocused();
     useEffect(() => {
-        setLoading(true);
-        axios.get(`http://192.168.29.97:5000/conversation/${userId}`)
-        .then(({ data }) => {
-            setConversations(data);
-            setLoading(false);
-        })
-        .catch(err => {
-            setLoading(false);
-            console.log(err);
-        });
+        fetchConvo(userId)
     }, [isFocused]);
     return (
         <>
@@ -32,18 +21,20 @@ const ChatMenu = ({ userId }) => {
                 ? <Loader />
                 : !conversations.length
                 ? <NoResultScreen />
-                : <Text>hello</Text>
+                : <Conversations convos={conversations} />
             }
         </>
     );
 };
 
-const mapStateToProps = ({ user }) => ({
-    userId: user.user._id
+const mapStateToProps = ({ user, convo }) => ({
+    userId: user.user._id,
+    loading: convo.isPending,
+    conversations: convo.conversations
 });
 
 const mapDispatchToProps = dispatch => ({
-
+    fetchConvo: id => dispatch(fetchConversations(id))
 });
 
 export default connect(
