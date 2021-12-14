@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import axios from "axios";
 
 import Loader from "../../../components/loader/loader.component";
@@ -7,7 +7,7 @@ import Message from "../components/message.component";
 
 const MessagesScreen = ({ navigation, route }) => {
     const { person, convoId, userId} = route.params;
-    navigation.setOptions({title: person.username});
+    navigation.setOptions({ title: person.username });
     const [messages, setMessages] = useState(null);
     useEffect(() => {
         axios.get(`http://192.168.29.97:5000/message/${convoId}`)
