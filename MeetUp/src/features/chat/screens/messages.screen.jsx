@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, TextInput } from "react-native";
+import { ScrollView, TextInput, View } from "react-native";
 import axios from "axios";
-import { Searchbar } from 'react-native-paper';
 import styled from "styled-components/native";
+import {Feather} from "@expo/vector-icons";
 
 import Loader from "../../../components/loader/loader.component";
 import Message from "../components/message.component";
+import Spacer from "../../../components/spacer/spacer.component";
 
 const MessageSender = styled(TextInput)`
     z-index: 999;
-    bottom: 3px;
     border-radius: 21px;
     font-size: 18px;
     width: 80%;
@@ -17,9 +17,9 @@ const MessageSender = styled(TextInput)`
     padding: 7px;
     border-color: #575656;
     border-width: 2px;
-    margin: 3px;
-    width: 98%;
+    width: 84%;
     align-self: center;
+    max-height: 168px;
 `;
 
 const MessagesScreen = ({ navigation, route }) => {
@@ -47,9 +47,23 @@ const MessagesScreen = ({ navigation, route }) => {
                     ))
                 }
             </ScrollView>
-            <MessageSender
-                placeholder="Message..."
-            />
+            <View style={{
+                flexDirection: "row",
+                alignItems: "center",
+                margin: 7,
+                // justifyContent: "space-between"
+            }}>
+                <MessageSender
+                    placeholder="Message..."
+                    multiline={true}
+                />
+                <Spacer position="left"/>
+                <Feather 
+                    name="send"
+                    size={42}
+                    color="#575656"
+                />
+            </View>
         </>
     );
 };
