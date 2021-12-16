@@ -22,6 +22,12 @@ const MessageSender = styled(TextInput)`
     max-height: 168px;
 `;
 
+const FooterMessageInput = styled(View)`
+    flex-direction: row;
+    align-items: center;
+    margin: 7px;
+`;
+
 const MessagesScreen = ({ navigation, route }) => {
     const { person, convoId, userId} = route.params;
     navigation.setOptions({ title: person.username });
@@ -34,9 +40,9 @@ const MessagesScreen = ({ navigation, route }) => {
     if (messages === null) return <Loader />;
     return (
         <>
-            <ScrollView>
+            <ScrollView nestedScrollEnabled={true}>
                 {
-                    [...messages, ...messages, ...messages].map(({_id, sender, text, createdAt}) => (
+                    messages.map(({_id, sender, text, createdAt}) => (
                         <Message 
                             key={_id}
                             sender={sender}
@@ -47,12 +53,7 @@ const MessagesScreen = ({ navigation, route }) => {
                     ))
                 }
             </ScrollView>
-            <View style={{
-                flexDirection: "row",
-                alignItems: "center",
-                margin: 7,
-                // justifyContent: "space-between"
-            }}>
+            <FooterMessageInput>
                 <MessageSender
                     placeholder="Message..."
                     multiline={true}
@@ -63,7 +64,7 @@ const MessagesScreen = ({ navigation, route }) => {
                     size={42}
                     color="#575656"
                 />
-            </View>
+            </FooterMessageInput>
         </>
     );
 };

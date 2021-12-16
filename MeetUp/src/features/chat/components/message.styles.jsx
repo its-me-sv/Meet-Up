@@ -1,10 +1,10 @@
 import styled from "styled-components/native";
-import { Dimensions } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
 
 const screenWidth = Dimensions.get("screen").width;
 
-export const MessageContainer = styled.View`
-    background-color: #a4a0a0;
+export const MessageContainer = styled(ScrollView)`
+    background-color: #bdb8b8;
     max-width: ${0.6 * screenWidth}px;
     margin: 6px;
     margin-bottom: 1px;
@@ -16,6 +16,7 @@ export const MessageContainer = styled.View`
         background-color: #d6d4d4;
         margin-left: auto;
     `}
+    max-height: 168px;
 `;
 
 export const Message = styled.Text`

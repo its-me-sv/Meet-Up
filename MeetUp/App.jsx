@@ -2,7 +2,6 @@ import React from 'react';
 import { ThemeProvider } from "styled-components/native";
 import { useFonts } from 'expo-font';
 import { Provider } from "react-redux";
-import { ScrollView } from 'react-native';
 
 import store from "./src/redux/store";
 import theme from "./src/infrastructure/theme/index";

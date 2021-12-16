@@ -10,7 +10,7 @@ import {
 const Message = ({ sender, message, time, userId }) => {
     const fromUser = sender === userId;
     return (
-        <MessageContainer fromUser={fromUser}>
+        <MessageContainer fromUser={fromUser} nestedScrollEnabled={true}>
             <MessageText>{message}</MessageText>
             <TimeText fromUser={fromUser}>{format(time)}</TimeText>
         </MessageContainer>
