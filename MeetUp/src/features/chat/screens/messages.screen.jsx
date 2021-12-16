@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ScrollView, TextInput, View } from "react-native";
 import axios from "axios";
 import styled from "styled-components/native";
@@ -32,15 +32,22 @@ const MessagesScreen = ({ navigation, route }) => {
     const { person, convoId, userId} = route.params;
     navigation.setOptions({ title: person.username });
     const [messages, setMessages] = useState(null);
+    const scrollViewRef = useRef();
     useEffect(() => {
         axios.get(`http://192.168.29.97:5000/message/${convoId}`)
-        .then(({ data }) => setMessages(data))
+        .then(({ data }) => {
+            setMessages(data);
+            scrollViewRef?.current?.scrollToEnd({animated: false});
+        })
         .catch(console.log);
     }, []);
     if (messages === null) return <Loader />;
     return (
         <>
-            <ScrollView nestedScrollEnabled={true}>
+            <ScrollView 
+                nestedScrollEnabled={true} 
+                ref={scrollViewRef}
+            >
                 {
                     messages.map(({_id, sender, text, createdAt}) => (
                         <Message 

@@ -16,7 +16,7 @@ export const MessageContainer = styled(ScrollView)`
         background-color: #d6d4d4;
         margin-left: auto;
     `}
-    max-height: 168px;
+    max-height: 170px;
 `;
 
 export const Message = styled.Text`
