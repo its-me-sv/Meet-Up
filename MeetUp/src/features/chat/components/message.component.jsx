@@ -11,7 +11,7 @@ const Message = ({ sender, message, time, userId }) => {
     const fromUser = sender === userId;
     return (
         <MessageContainer fromUser={fromUser} nestedScrollEnabled={true}>
-            <MessageText>{message}</MessageText>
+            <MessageText selectable={true}>{message}</MessageText>
             <TimeText fromUser={fromUser}>{format(time)}</TimeText>
         </MessageContainer>
     );
