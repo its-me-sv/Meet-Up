@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ScrollView, TextInput, View } from "react-native";
+import { ScrollView, TextInput, View, TouchableOpacity, Keyboard } from "react-native";
 import axios from "axios";
 import styled from "styled-components/native";
 import {Feather} from "@expo/vector-icons";
@@ -33,6 +33,22 @@ const MessagesScreen = ({ navigation, route }) => {
     navigation.setOptions({ title: person.username });
     const [messages, setMessages] = useState(null);
     const scrollViewRef = useRef();
+    const [messageText, setMessageText] = useState("");
+    const sendMessage = () => {
+        Keyboard.dismiss();
+        const body = {
+            conversationId: convoId,
+            sender: userId,
+            text: messageText
+        };
+        setMessageText("");
+        axios.post("http://192.168.29.97:5000/message", body)
+        .then(({ data }) => {
+            setMessages([...messages, data]);
+            scrollViewRef?.current?.scrollToEnd({ animated: false });
+        })
+        .catch(console.log);
+    };
     useEffect(() => {
         axios.get(`http://192.168.29.97:5000/message/${convoId}`)
         .then(({ data }) => {
@@ -64,13 +80,21 @@ const MessagesScreen = ({ navigation, route }) => {
                 <MessageSender
                     placeholder="Message..."
                     multiline={true}
+                    autoCapitalize="none"
+                    onChangeText={setMessageText}
+                    value={messageText}
                 />
                 <Spacer position="left"/>
-                <Feather 
-                    name="send"
-                    size={42}
-                    color="#575656"
-                />
+                <TouchableOpacity 
+                    onPress={sendMessage}
+                    disabled={!messageText.length}
+                >
+                    <Feather 
+                        name="send"
+                        size={42}
+                        color={!messageText.length ? "#575656" : "black"}
+                    />
+                </TouchableOpacity>
             </FooterMessageInput>
         </>
     );
