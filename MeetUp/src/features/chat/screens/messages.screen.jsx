@@ -45,16 +45,12 @@ const MessagesScreen = ({ navigation, route }) => {
         axios.post("http://192.168.29.97:5000/message", body)
         .then(({ data }) => {
             setMessages([...messages, data]);
-            scrollViewRef?.current?.scrollToEnd({ animated: false });
         })
         .catch(console.log);
     };
     useEffect(() => {
         axios.get(`http://192.168.29.97:5000/message/${convoId}`)
-        .then(({ data }) => {
-            setMessages(data);
-            scrollViewRef?.current?.scrollToEnd({animated: false});
-        })
+        .then(({ data }) => setMessages(data))
         .catch(console.log);
     }, []);
     if (messages === null) return <Loader />;
@@ -63,6 +59,7 @@ const MessagesScreen = ({ navigation, route }) => {
             <ScrollView 
                 nestedScrollEnabled={true} 
                 ref={scrollViewRef}
+                onContentSizeChange={() => scrollViewRef?.current?.scrollToEnd({ animated: true })}
             >
                 {
                     messages.map(({_id, sender, text, createdAt}) => (
