@@ -55,7 +55,7 @@ const MessagesScreen = ({ navigation, route }) => {
         .catch(console.log);
     };
     useEffect(() => {
-        axios.get(`http://192.168.29.97:5000/message/${convoId}`)
+        axios.get(`http://192.168.29.97:5000/message/${convoId||"null"}`)
         .then(({ data }) => setMessages(data))
         .catch(console.log);
         setSocket(io("http://192.168.29.97:5002", { query: `userId=${userId}` }));

@@ -33,8 +33,17 @@ router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
         const conversations = await Conversation.findOne({
             members: { $all: [firstUserId, secondUserId] }
         });
-        if (!conversations)
-            return res.status(400).json("No conversation made");
+        if (!conversations) {
+            const newConversation = new Conversation({
+                members: [firstUserId, secondUserId]
+            });
+            try {
+                const savedConversation = await newConversation.save();
+                return res.status(200).json(savedConversation);
+            } catch (err) {
+                return res.status(500).json(err.message);
+            }
+        }
         return res.status(200).json(conversations);
     } catch (err) {
         return res.status(500).json(err.message);

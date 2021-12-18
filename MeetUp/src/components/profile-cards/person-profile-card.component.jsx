@@ -5,6 +5,7 @@ import { format } from "timeago.js";
 import { connect } from "react-redux";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import Spacer from "../spacer/spacer.component";
 import {
@@ -56,8 +57,13 @@ const PersonProfileCard = ({
     const [person, setPerson] = useState(null);
     const [friends, setFriends] = useState([]);
     const [interests, setInterests] = useState([]);
+    const [convoId, setConvoId] = useState("");
     const isFocused = useIsFocused();
+    const navigation = useNavigation();
     useEffect(() => {
+        axios.get(`http://192.168.29.97:5000/conversation/find/${userId}/${id}`)
+        .then(({ data }) => setConvoId(data._id))
+        .catch(console.log);
         axios.get(`http://192.168.29.97:5000/user?userId=${id}`)
         .then(({ data }) => setPerson(data))
         .catch(console.log);
@@ -97,7 +103,11 @@ const PersonProfileCard = ({
                             marginTop: "auto",
                             flexDirection: "row"
                         }}>
-                            <MessageButton>Message</MessageButton>
+                            <MessageButton onPress={() => navigation.navigate("Chat Screen", {
+                                convoId,
+                                person,
+                                userId
+                            })}>Message</MessageButton>
                             <Spacer position="left" size="medium" />
                             {
                                 isFriend

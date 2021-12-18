@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -41,7 +41,10 @@ const screenOptions = ({ route }) => ({
 
 const AppNavigator = () => {
     return (
-        <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Navigator
+            initialRouteName="Chat"
+            screenOptions={screenOptions}
+        >
             <Tab.Screen name="Chat" component={ChatScreen} />
             <Tab.Screen name="Explor" component={ExploreMenu} />
             <Tab.Screen name="Setting" component={SettingsScreen} />
