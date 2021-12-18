@@ -5,6 +5,7 @@ const screenWidth = Dimensions.get("screen").width;
 
 export const MessageContainer = styled(ScrollView)`
     background-color: #bdb8b8;
+    align-self: flex-start;
     max-width: ${0.6 * screenWidth}px;
     margin: 6px;
     margin-bottom: 1px;
