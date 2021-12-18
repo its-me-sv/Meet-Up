@@ -3,6 +3,7 @@ import { ScrollView, TextInput, View, TouchableOpacity, Keyboard } from "react-n
 import axios from "axios";
 import styled from "styled-components/native";
 import {Feather} from "@expo/vector-icons";
+import {io} from "socket.io-client";
 
 import Loader from "../../../components/loader/loader.component";
 import Message from "../components/message.component";
@@ -34,6 +35,7 @@ const MessagesScreen = ({ navigation, route }) => {
     const [messages, setMessages] = useState(null);
     const scrollViewRef = useRef();
     const [messageText, setMessageText] = useState("");
+    const [socket, setSocket] = useState(null);
     const sendMessage = () => {
         Keyboard.dismiss();
         const body = {
@@ -45,6 +47,10 @@ const MessagesScreen = ({ navigation, route }) => {
         axios.post("http://192.168.29.97:5000/message", body)
         .then(({ data }) => {
             setMessages([...messages, data]);
+            socket?.emit("new-message", {
+                to: person._id,
+                data
+            });
         })
         .catch(console.log);
     };
@@ -52,14 +58,21 @@ const MessagesScreen = ({ navigation, route }) => {
         axios.get(`http://192.168.29.97:5000/message/${convoId}`)
         .then(({ data }) => setMessages(data))
         .catch(console.log);
+        setSocket(io("http://192.168.29.97:5002", { query: `userId=${userId}` }));
+        return () => {
+            socket?.disconnect();
+        };
     }, []);
     if (messages === null) return <Loader />;
+    socket?.on("new-message", rd => {
+        setMessages([...messages, rd]);
+    });
     return (
         <>
             <ScrollView 
                 nestedScrollEnabled={true} 
                 ref={scrollViewRef}
-                onContentSizeChange={() => scrollViewRef?.current?.scrollToEnd({ animated: true })}
+                onContentSizeChange={() => scrollViewRef?.current?.scrollToEnd({ animated: false })}
             >
                 {
                     messages.map(({_id, sender, text, createdAt}) => (
