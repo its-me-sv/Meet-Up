@@ -13,7 +13,8 @@ const io = new Server(httpServer, {
 const users = {};
 io.on("connection", socket => {
     console.log(`${socket.id} connected`);
-    users[socket.handshake.query.userId] = socket.id;
+    const idOfUser = socket.handshake.query.userId;
+    if (idOfUser) users[idOfUser] = socket.id;
     socket.on("disconnect", () => {
         console.log(`${socket.id} disconnected`);
     });

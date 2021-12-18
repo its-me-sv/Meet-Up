@@ -2,10 +2,13 @@ import React from 'react';
 import { ThemeProvider } from "styled-components/native";
 import { useFonts } from 'expo-font';
 import { Provider } from "react-redux";
+import {io} from "socket.io-client";
 
 import store from "./src/redux/store";
 import theme from "./src/infrastructure/theme/index";
 import Navigation from './src/infrastructure/navigation/navigator.component';
+
+io("http://192.168.29.97:5002");
 
 const App = () => {
   const [HunderedMiraclesPlain] = useFonts({
