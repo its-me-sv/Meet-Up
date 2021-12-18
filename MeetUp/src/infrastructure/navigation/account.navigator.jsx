@@ -13,7 +13,10 @@ const Stack = createStackNavigator();
 
 const AccountNavigator = () => {
     return (
-        <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Navigator 
+            screenOptions={screenOptions}
+            initialRouteName="Login"
+        >
             <Stack.Screen name="Login" component={AccountScreen}/>
             <Stack.Screen name="Register" component={RegisterScreen}/>
             <Stack.Screen name="Conditions" component={ConditionsScreen}/>
