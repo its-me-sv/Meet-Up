@@ -5,6 +5,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { Divider } from "react-native-paper";
 import { format } from "timeago.js";
 import numberToText from 'number-to-text';
+require('number-to-text/converters/en-us');
 
 import Loader from "../loader/loader.component";
 import {
